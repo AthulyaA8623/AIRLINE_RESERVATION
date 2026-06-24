@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up | SkyWay Airlines</title>
+    <link rel="stylesheet" href="../css/signup.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="split-container">
+        <!-- Left Side - Animated Illustrations -->
+        <div class="left-side">
+            <div class="brand">
+                <div class="logo-animation">
+                    <i class="fas fa-rocket"></i>
+                    <div class="logo-trail"></div>
+                </div>
+                <h1>SkyWay</h1>
+                <p>Airlines</p>
+            </div>
+            
+            <div class="animation-container">
+                <div class="floating-elements">
+                    <div class="floating-element cloud1">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <div class="floating-element cloud2">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <div class="floating-element cloud3">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <div class="floating-element rocket">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <div class="floating-element gift">
+                        <i class="fas fa-gift"></i>
+                    </div>
+                    <div class="floating-element map">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="floating-element star star1">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="floating-element star star2">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="floating-element star star3">
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                
+                <div class="benefits-slider">
+                    <div class="benefit-slide active">
+                        <i class="fas fa-ticket-alt"></i>
+                        <h3>Exclusive Welcome Offer</h3>
+                        <p>Get 20% off on your first booking + 500 bonus points</p>
+                    </div>
+                    <div class="benefit-slide">
+                        <i class="fas fa-suitcase-rolling"></i>
+                        <h3>Extra Baggage Allowance</h3>
+                        <p>Sign up now and get 10kg extra baggage on your first flight</p>
+                    </div>
+                    <div class="benefit-slide">
+                        <i class="fas fa-crown"></i>
+                        <h3>Instant Silver Membership</h3>
+                        <p>Enjoy priority check-in and lounge access on joining</p>
+                    </div>
+                </div>
+                
+                <div class="slider-dots">
+                    <span class="dot active"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+            </div>
+            
+            <div class="stats-container">
+                <div class="stat-item">
+                    <div class="stat-number" data-target="100">0</div>
+                    <div class="stat-label">Destinations</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-target="10">0</div>
+                    <div class="stat-label">M+ Happy Travelers</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-target="5000">0</div>
+                    <div class="stat-label">Daily Flights</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Right Side - Signup Form -->
+        <div class="right-side">
+            <div class="form-container">
+                <div class="form-header">
+                    <div class="welcome-badge">
+                        <i class="fas fa-gift"></i>
+                        <span>Join SkyWay Family!</span>
+                    </div>
+                    <h2>Create an Account</h2>
+                    <p>Join us to unlock exclusive deals and manage your bookings</p>
+                </div>
+                
+                <form id="signupForm" class="signup-form">
+                    <div class="input-group">
+                        <div class="input-icon">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="input-field">
+                            <input type="text" id="fullName" placeholder=" " autocomplete="off">
+                            <label>Full Name</label>
+                            <div class="input-border"></div>
+                        </div>
+                        <div class="input-error" id="nameError"></div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <div class="input-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="input-field">
+                            <input type="email" id="email" placeholder=" " autocomplete="off">
+                            <label>Email Address</label>
+                            <div class="input-border"></div>
+                        </div>
+                        <div class="input-error" id="emailError"></div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <div class="input-icon">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <div class="input-field">
+                            <input type="tel" id="mobile" placeholder=" " autocomplete="off" maxlength="10">
+                            <label>Mobile Number</label>
+                            <div class="input-border"></div>
+                        </div>
+                        <div class="input-error" id="mobileError"></div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <div class="input-icon">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                        <div class="input-field">
+                            <input type="password" id="password" placeholder=" " autocomplete="off">
+                            <label>Password</label>
+                            <div class="input-border"></div>
+                            <button type="button" class="toggle-password" data-target="password">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <div class="password-strength" id="passwordStrength">
+                            <div class="strength-bar"></div>
+                            <span class="strength-text"></span>
+                        </div>
+                        <div class="input-error" id="passwordError"></div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <div class="input-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="input-field">
+                            <input type="password" id="confirmPassword" placeholder=" " autocomplete="off">
+                            <label>Confirm Password</label>
+                            <div class="input-border"></div>
+                            <button type="button" class="toggle-password" data-target="confirmPassword">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <div class="input-error" id="confirmError"></div>
+                    </div>
+                    
+                    <div class="form-options">
+                        <label class="checkbox-container">
+                            <input type="checkbox" id="termsCheckbox">
+                            <span class="checkmark"></span>
+                            <span class="checkbox-text">I agree to the <a href="#" id="termsLink">Terms of Service</a> and <a href="#" id="privacyLink">Privacy Policy</a></span>
+                        </label>
+                    </div>
+                    
+                    <div class="form-options">
+                        <label class="checkbox-container">
+                            <input type="checkbox" id="offersCheckbox">
+                            <span class="checkmark"></span>
+                            <span class="checkbox-text">I want to receive exclusive offers and travel updates</span>
+                        </label>
+                    </div>
+                    
+                    <button type="submit" class="signup-btn" id="signupSubmitBtn">
+                        <span class="btn-text">Create Account</span>
+                        <span class="btn-loader" style="display: none;">
+                            <i class="fas fa-spinner fa-spin"></i>
+                        </span>
+                    </button>
+                    
+                    <div class="divider">
+                        <span>Or sign up with</span>
+                    </div>
+                    
+                    <div class="social-signup">
+                        <button type="button" class="social-btn google" id="googleSignup">
+                            <i class="fab fa-google"></i>
+                            <span>Google</span>
+                        </button>
+                        <button type="button" class="social-btn facebook" id="facebookSignup">
+                            <i class="fab fa-facebook-f"></i>
+                            <span>Facebook</span>
+                        </button>
+                        <button type="button" class="social-btn apple" id="appleSignup">
+                            <i class="fab fa-apple"></i>
+                            <span>Apple</span>
+                        </button>
+                    </div>
+                    
+                    <div class="form-footer">
+                        <p>Already have an account? <a href="login.html" class="login-link">Login here</a></p>
+                        <p class="back-home"><a href="index.html"><i class="fas fa-arrow-left"></i> Back to Home</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <div id="toast" class="toast"></div>
+    
+    <script src="../js/signup.js"></script>
+</body>
+</html>

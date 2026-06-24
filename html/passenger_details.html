@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Passenger Details | BlueSky Airlines</title>
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/passenger_details.css">
+</head>
+<body>
+
+<!-- Navbar -->
+<div class="navbar">
+    <div class="nav-container">
+        <div class="logo"><i class="fas fa-plane-departure"></i> BlueSky</div>
+        <div class="nav-links">
+            <a href="#" id="homeNav">Home</a>
+            <a href="#" id="passengerDetailsNav">Passenger Details</a>
+        </div>
+        <div class="auth-buttons">
+            <button class="btn-login" id="loginBtn">Login</button>
+            <button class="btn-signup" id="signupBtn">Sign Up</button>
+        </div>
+    </div>
+</div>
+
+<!-- Progress Steps (Step 2 Active - Passenger) -->
+<div class="progress-steps">
+    <div class="steps">
+        <a href="flights.html" class="step completed">
+            <div class="step-circle">✓</div>
+            <span>Flight</span>
+        </a>
+        <div class="step-line"></div>
+        <span class="step active">
+            <div class="step-circle">2</div>
+            <span>Passenger</span>
+        </span>
+        <div class="step-line"></div>
+        <a href="addons.html" class="step">
+            <div class>step-circle">3</div>
+            <span>Add-ons</span>
+        </a>
+        <div class="step-line"></div>
+        <a href="seat_selection.html" class="step">
+            <div class="step-circle">4</div>
+            <span>Seat</span>
+        </a>
+        <div class="step-line"></div>
+        <a href="summary.html" class="step">
+            <div class="step-circle">5</div>
+            <span>Summary</span>
+        </a>
+        <div class="step-line"></div>
+        <a href="payment.html" class="step">
+            <div class="step-circle">6</div>
+            <span>Payment</span>
+        </a>
+    </div>
+</div>
+
+<!-- Main Container -->
+<div class="container">
+    <!-- Flight Info -->
+    <div class="flight-card" id="flightInfoContainer"></div>
+
+    <!-- Fare Selection -->
+    <div class="section-card">
+        <div class="section-title">
+            <i class="fas fa-ticket-alt"></i>
+            <span>Select Fare Class</span>
+            <div class="title-line"></div>
+        </div>
+        <div class="fare-toggle" id="fareToggle">
+            <div class="fare-option" data-class="economy">
+                <div class="fare-name">
+                    <i class="fas fa-economy"></i> 
+                    <span>Economy Class</span>
+                </div>
+                <div class="fare-price" id="economyPrice">₹0</div>
+                <ul class="fare-details">
+                    <li><i class="fas fa-check-circle"></i> Cabin: 7kg</li>
+                    <li><i class="fas fa-check-circle"></i> Check-in: 15kg</li>
+                    <li><i class="fas fa-times-circle"></i> Meal not included</li>
+                    <li><i class="fas fa-chair"></i> Seat: at check-in</li>
+                </ul>
+                <div class="fare-badge">SAVER</div>
+            </div>
+            <div class="fare-option" data-class="business">
+                <div class="fare-name">
+                    <i class="fas fa-crown"></i> 
+                    <span>Business Class</span>
+                </div>
+                <div class="fare-price" id="businessPrice">₹0</div>
+                <ul class="fare-details">
+                    <li><i class="fas fa-check-circle"></i> Cabin: 10kg</li>
+                    <li><i class="fas fa-check-circle"></i> Check-in: 25kg</li>
+                    <li><i class="fas fa-utensils"></i> Meal included</li>
+                    <li><i class="fas fa-star"></i> Free seat selection</li>
+                </ul>
+                <div class="fare-badge premium">PREMIUM</div>
+            </div>
+        </div>
+        <div id="fareError" class="error-msg"></div>
+    </div>
+
+    <!-- Passenger Details Section -->
+    <div class="section-card">
+        <div class="section-title">
+            <i class="fas fa-users"></i>
+            <span>Passenger Details</span>
+            <div class="title-line"></div>
+        </div>
+        
+        <!-- Passengers Container - All passenger forms will be here -->
+        <div id="passengersContainer"></div>
+        
+        <!-- Add Passenger Button -->
+        <button class="btn-add-passenger" id="addPassengerBtn">
+            <i class="fas fa-plus-circle"></i> Add Another Passenger
+        </button>
+    </div>
+
+    <!-- Contact Details -->
+    <div class="section-card">
+        <div class="section-title">
+            <i class="fas fa-phone-alt"></i>
+            <span>Contact Details</span>
+            <div class="title-line"></div>
+        </div>
+        <div class="contact-row">
+            <div class="form-group">
+                <label><i class="fas fa-mobile-alt"></i> Phone Number <span class="required">*</span></label>
+                <input type="tel" id="phone" placeholder="10-digit mobile number">
+                <div id="phoneError" class="error-msg"></div>
+                <div class="input-hint">Booking confirmation will be sent via SMS</div>
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-envelope"></i> Email ID <span class="required">*</span></label>
+                <input type="email" id="email" placeholder="you@example.com">
+                <div id="emailError" class="error-msg"></div>
+                <div class="input-hint">E-ticket will be sent to this email</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Price Summary -->
+    <div class="price-summary-card">
+        <div class="price-header">
+            <i class="fas fa-receipt"></i>
+            <span>Fare Summary</span>
+        </div>
+        <div class="price-details">
+            <div class="price-detail-row">
+                <span>Base Fare (Adult)</span>
+                <span id="baseFareAmount">₹0</span>
+            </div>
+            <div id="passengerFareBreakdown"></div>
+            <div class="price-detail-row total">
+                <span>Total Amount</span>
+                <span id="totalAmountDisplay">₹0</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Proceed Button -->
+    <button class="btn-proceed" id="proceedBtn">
+        <span>Proceed to Add-ons</span>
+        <i class="fas fa-arrow-right"></i>
+    </button>
+</div>
+
+<script src="../js/passenger_details.js"></script>
+</body>
+</html>

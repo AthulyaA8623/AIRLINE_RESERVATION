@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQs | SkyWay Airlines</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1E3A5F;
+            --secondary: #F05A28;
+            --gray: #64748b;
+            --light-gray: #f8fafc;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Poppins', sans-serif;
+            background: var(--white);
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: var(--white);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .nav-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo i {
+            font-size: 1.8rem;
+            color: var(--secondary);
+        }
+
+        .logo h1 {
+            font-size: 1.6rem;
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--gray);
+            font-weight: 500;
+        }
+
+        .back-home {
+            background: var(--secondary);
+            color: white;
+            padding: 0.5rem 1.2rem;
+            border-radius: 8px;
+            text-decoration: none;
+        }
+
+        .page-header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 120px 2rem 4rem;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+
+        .faq-item {
+            background: var(--white);
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .faq-question {
+            padding: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--light-gray);
+        }
+
+        .faq-question h3 {
+            font-size: 1rem;
+            color: var(--primary);
+        }
+
+        .faq-question i {
+            color: var(--secondary);
+            transition: transform 0.3s;
+        }
+
+        .faq-answer {
+            padding: 0 1.2rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s;
+            color: var(--gray);
+            line-height: 1.6;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 1.2rem;
+            max-height: 200px;
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+
+        .footer {
+            background: var(--primary);
+            color: white;
+            padding: 3rem 2rem 1rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            .page-header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="logo">
+            <i class="fas fa-plane-departure"></i>
+            <h1>SkyWay</h1>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="faq.html" style="color: var(--secondary);">FAQs</a>
+            <a href="contact.html">Contact</a>
+            <a href="index.html" class="back-home"><i class="fas fa-home"></i> Back</a>
+        </div>
+    </div>
+</nav>
+
+<div class="page-header">
+    <h1>Frequently Asked Questions</h1>
+    <p>Find answers to common questions about SkyWay Airlines</p>
+</div>
+
+<div class="faq-container">
+    <div class="faq-item">
+        <div class="faq-question">
+            <h3>How do I book a flight on SkyWay?</h3>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+            <p>You can book a flight easily through our website or mobile app. Simply enter your travel details (from, to, date, passengers), select your preferred flight, enter passenger details, choose seats, add extras, make payment, and receive your confirmation via email/SMS.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <div class="faq-question">
+            <h3>What is the baggage allowance?</h3>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+            <p>Economy Class: 15kg check-in + 7kg cabin baggage. Business Class: 25kg check-in + 10kg cabin baggage. Infants: 10kg check-in. Additional baggage can be purchased online for discounted rates.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <div class="faq-question">
+            <h3>How can I cancel my booking?</h3>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+            <p>You can cancel your booking through 'My Bookings' section on our website or app. Cancellation charges apply based on how close to departure you cancel. Full refund available for cancellations made 24 hours before departure.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <div class="faq-question">
+            <h3>Can I select my seat in advance?</h3>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+            <p>Yes! You can select your seat during the booking process. We offer window, aisle, and middle seats. Preferred seats may have an additional charge.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <div class="faq-question">
+            <h3>What documents do I need for domestic travel?</h3>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+            <p>For domestic travel, you need any government-issued ID proof: Aadhar Card, Voter ID, Passport, Driving License, or PAN Card. For international travel, valid passport and visa are required.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <div class="faq-question">
+            <h3>How early should I arrive at the airport?</h3>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+            <p>We recommend arriving at least 2 hours before domestic flights and 3 hours before international flights. Check-in counters close 60 minutes before departure.</p>
+        </div>
+    </div>
+</div>
+
+<footer class="footer">
+    <div class="footer-content">
+        <div>
+            <h3>SkyWay Airlines</h3>
+            <p>Fly Smart, Fly Safe</p>
+        </div>
+        <div>
+            <h3>Quick Links</h3>
+            <p><a href="about.html" style="color: white; text-decoration: none;">About Us</a></p>
+            <p><a href="contact.html" style="color: white; text-decoration: none;">Contact</a></p>
+        </div>
+        <div>
+            <h3>Connect With Us</h3>
+            <i class="fab fa-facebook" style="margin-right: 1rem;"></i>
+            <i class="fab fa-twitter" style="margin-right: 1rem;"></i>
+            <i class="fab fa-instagram"></i>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2026 SkyWay Airlines. All rights reserved.</p>
+    </div>
+</footer>
+
+<script>
+    document.querySelectorAll('.faq-question').forEach(question => {
+        question.addEventListener('click', () => {
+            const faqItem = question.parentElement;
+            faqItem.classList.toggle('active');
+        });
+    });
+
+    window.addEventListener('scroll', () => {
+        const navbar = document.querySelector('.navbar');
+        if (window.scrollY > 100) {
+            navbar.style.padding = '0.5rem 0';
+        } else {
+            navbar.style.padding = '1rem 0';
+        }
+    });
+</script>
+</body>
+</html>

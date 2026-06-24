@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seat Selection | BlueSky Airlines</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/seat_selection.css">
+</head>
+<body>
+
+<!-- Navbar -->
+<div class="navbar">
+    <div class="nav-container">
+        <div class="logo"><i class="fas fa-plane-departure"></i> BlueSky</div>
+        <div class="nav-links">
+            <a href="#" id="homeNav">Home</a>
+            <a href="#" id="passengerDetailsNav">Passenger Details</a>
+        </div>
+        <div class="auth-buttons">
+            <button class="btn-login" id="loginBtn">Login</button>
+            <button class="btn-signup" id="signupBtn">Sign Up</button>
+        </div>
+    </div>
+</div>
+
+<!-- Progress Steps (Step 4 Active - Seat) -->
+<div class="progress-steps">
+    <div class="steps">
+        <a href="flights.html" class="step completed">
+            <div class="step-circle">✓</div>
+            <span>Flight</span>
+        </a>
+        <div class="step-line"></div>
+        <a href="passenger_details.html" class="step completed">
+            <div class="step-circle">✓</div>
+            <span>Passenger</span>
+        </a>
+        <div class="step-line"></div>
+        <a href="addons.html" class="step completed">
+            <div class="step-circle">✓</div>
+            <span>Add-ons</span>
+        </a>
+        <div class="step-line"></div>
+        <span class="step active">
+            <div class="step-circle">4</div>
+            <span>Seat</span>
+        </span>
+        <div class="step-line"></div>
+        <a href="summary.html" class="step">
+            <div class="step-circle">5</div>
+            <span>Summary</span>
+        </a>
+        <div class="step-line"></div>
+        <a href="payment.html" class="step">
+            <div class="step-circle">6</div>
+            <span>Payment</span>
+        </a>
+    </div>
+</div>
+
+<!-- Main Container -->
+<div class="container">
+    <div class="main-layout">
+        <!-- Seat Map Section with Scroll -->
+        <div class="seat-map-section">
+            <div class="seat-map-header">
+                <h2><i class="fas fa-chair"></i> Select Your Seat</h2>
+                <p class="subtitle">Click on any available seat to select</p>
+            </div>
+
+            <!-- Scrollable Content -->
+            <div class="seat-map-scroll">
+                <!-- Business Class -->
+                <div class="class-group business">
+                    <div class="class-label">
+                        <i class="fas fa-crown"></i>
+                        <span>Business Class</span>
+                        <small>Rows 1-5 | 2-2 Configuration</small>
+                    </div>
+                    <div class="seat-grid" id="businessSeats"></div>
+                </div>
+
+                <!-- Exit Row Notice -->
+                <div class="exit-notice">
+                    <i class="fas fa-exit"></i>
+                    <span>Exit Row Seats</span>
+                    <span class="note">Additional legroom available</span>
+                </div>
+
+                <!-- Economy Class -->
+                <div class="class-group economy">
+                    <div class="class-label">
+                        <i class="fas fa-plane"></i>
+                        <span>Economy Class</span>
+                        <small>Rows 6-30 | 3-3 Configuration</small>
+                    </div>
+                    <div class="seat-grid" id="economySeats"></div>
+                </div>
+            </div>
+
+            <!-- Legend -->
+            <div class="legend">
+                <div class="legend-item"><div class="legend-box available"></div><span>Available</span></div>
+                <div class="legend-item"><div class="legend-box booked"></div><span>Booked</span></div>
+                <div class="legend-item"><div class="legend-box selected"></div><span>Your Selection</span></div>
+                <div class="legend-item"><div class="legend-box premium"></div><span>Extra Legroom</span></div>
+                <div class="legend-item"><span>🪟</span><span>Window</span></div>
+                <div class="legend-item"><span>🚶</span><span>Aisle</span></div>
+            </div>
+        </div>
+
+        <!-- Summary Panel -->
+        <div class="summary-panel">
+            <div class="summary-card">
+                <h3><i class="fas fa-ticket-alt"></i> Booking Summary</h3>
+                
+                <div class="flight-summary">
+                    <div class="summary-row">
+                        <span class="label">Flight</span>
+                        <span class="value">AI-202 • Air India</span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="label">Route</span>
+                        <span class="value">Delhi → Mumbai</span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="label">Date</span>
+                        <span class="value">15 Apr 2026, 08:30 - 11:45</span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="label">Passenger</span>
+                        <span class="value" id="passengerName">Rajesh Kumar</span>
+                    </div>
+                </div>
+
+                <div class="divider"></div>
+
+                <div class="seat-selection-display" id="seatSelectionDisplay">
+                    <div class="empty-seat">
+                        <i class="fas fa-chair"></i>
+                        <p>No seat selected</p>
+                        <span>Click on any available seat</span>
+                    </div>
+                </div>
+
+                <div class="divider"></div>
+
+                <div class="price-summary">
+                    <div class="price-row">
+                        <span>Base Fare</span>
+                        <span id="baseFare">₹4,500</span>
+                    </div>
+                    <div class="price-row">
+                        <span>Seat Fee</span>
+                        <span id="seatFee">₹0</span>
+                    </div>
+                    <div class="price-row total">
+                        <span>Total Amount</span>
+                        <span id="totalAmount">₹4,500</span>
+                    </div>
+                </div>
+
+                <button class="continue-btn" id="continueBtn" disabled>
+                    Continue to Summary <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="../js/seat_selection.js"></script>
+</body>
+</html>

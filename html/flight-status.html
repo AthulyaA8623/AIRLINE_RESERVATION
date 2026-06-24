@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Status | SkyWay Airlines</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1E3A5F;
+            --secondary: #F05A28;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --gray: #64748b;
+            --light-gray: #f8fafc;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Poppins', sans-serif;
+            background: var(--light-gray);
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: var(--white);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .nav-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo i {
+            font-size: 1.8rem;
+            color: var(--secondary);
+        }
+
+        .logo h1 {
+            font-size: 1.6rem;
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--gray);
+            font-weight: 500;
+        }
+
+        .back-home {
+            background: var(--secondary);
+            color: white;
+            padding: 0.5rem 1.2rem;
+            border-radius: 8px;
+            text-decoration: none;
+        }
+
+        .page-header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 120px 2rem 4rem;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .status-container {
+            max-width: 800px;
+            margin: -50px auto 4rem;
+            padding: 0 2rem;
+        }
+
+        .search-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .search-btn {
+            background: var(--secondary);
+            color: white;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1rem;
+        }
+
+        .result-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-top: 2rem;
+            display: none;
+        }
+
+        .flight-status {
+            text-align: center;
+            padding: 1rem;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+        }
+
+        .status-on-time { background: #d1fae5; color: #065f46; }
+        .status-delayed { background: #fed7aa; color: #92400e; }
+        .status-cancelled { background: #fee2e2; color: #991b1b; }
+
+        .footer {
+            background: var(--primary);
+            color: white;
+            padding: 3rem 2rem 1rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .page-header h1 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="logo">
+            <i class="fas fa-plane-departure"></i>
+            <h1>SkyWay</h1>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="flight-status.html" style="color: var(--secondary);">Flight Status</a>
+            <a href="faq.html">FAQs</a>
+            <a href="contact.html">Contact</a>
+            <a href="index.html" class="back-home"><i class="fas fa-home"></i> Back</a>
+        </div>
+    </div>
+</nav>
+
+<div class="page-header">
+    <h1>Flight Status</h1>
+    <p>Check real-time flight status and schedule</p>
+</div>
+
+<div class="status-container">
+    <div class="search-card">
+        <div class="form-group">
+            <input type="text" id="flightNumber" placeholder="Enter Flight Number (e.g., AI-202)">
+        </div>
+        <div class="form-group">
+            <input type="date" id="flightDate">
+        </div>
+        <button class="search-btn" id="searchFlightBtn">Check Status <i class="fas fa-search"></i></button>
+    </div>
+
+    <div id="resultCard" class="result-card">
+        <div id="statusBadge" class="flight-status"></div>
+        <div id="flightDetails"></div>
+    </div>
+</div>
+
+<footer class="footer">
+    <div class="footer-content">
+        <div><h3>SkyWay Airlines</h3><p>Fly Smart, Fly Safe</p></div>
+        <div><h3>Quick Links</h3><p><a href="about.html" style="color:white;">About Us</a></p></div>
+        <div><h3>Connect With Us</h3><i class="fab fa-facebook"></i> <i class="fab fa-twitter"></i> <i class="fab fa-instagram"></i></div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 SkyWay Airlines. All rights reserved.</p></div>
+</footer>
+
+<script>
+    const flights = {
+        'AI-202': { airline: 'Air India', from: 'Chennai', to: 'Delhi', depart: '08:30', arrival: '11:45', status: 'On Time' },
+        '6E-345': { airline: 'IndiGo', from: 'Chennai', to: 'Bangalore', depart: '10:00', arrival: '11:15', status: 'On Time' },
+        'SG-101': { airline: 'SpiceJet', from: 'Mumbai', to: 'Delhi', depart: '14:00', arrival: '16:30', status: 'Delayed' }
+    };
+
+    document.getElementById('flightDate').valueAsDate = new Date();
+
+    document.getElementById('searchFlightBtn').addEventListener('click', () => {
+        const flightNo = document.getElementById('flightNumber').value.toUpperCase();
+        const flight = flights[flightNo];
+        const resultCard = document.getElementById('resultCard');
+        const statusBadge = document.getElementById('statusBadge');
+        const flightDetails = document.getElementById('flightDetails');
+
+        if (flight) {
+            resultCard.style.display = 'block';
+            statusBadge.className = `flight-status status-${flight.status.toLowerCase().replace(' ', '-')}`;
+            statusBadge.innerHTML = `<i class="fas fa-info-circle"></i> Status: ${flight.status}`;
+            flightDetails.innerHTML = `
+                <h3>✈️ ${flight.airline} - ${flightNo}</h3>
+                <p><i class="fas fa-map-marker-alt"></i> ${flight.from} → ${flight.to}</p>
+                <p><i class="fas fa-clock"></i> Departure: ${flight.depart} AM | Arrival: ${flight.arrival} AM</p>
+            `;
+        } else {
+            alert('Flight not found. Please check the flight number.');
+        }
+    });
+</script>
+</body>
+</html>

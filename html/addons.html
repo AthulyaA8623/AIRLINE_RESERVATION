@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Add-ons | BlueSky Airlines</title>
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <!-- External CSS -->
+    <link rel="stylesheet" href="../css/addons.css">
+</head>
+<body>
+
+<!-- Navbar -->
+<div class="navbar">
+    <div class="nav-container">
+        <div class="logo"><i class="fas fa-plane-departure"></i> BlueSky</div>
+        <div class="nav-links">
+            <a href="#" id="homeNav">Home</a>
+            <a href="#" id="passengerDetailsNav">Passenger Details</a>
+        </div>
+        <div class="auth-buttons">
+            <button class="btn-login" id="loginBtn">Login</button>
+            <button class="btn-signup" id="signupBtn">Sign Up</button>
+        </div>
+    </div>
+</div>
+
+<!-- Progress Steps (Step 3 Active - Add-ons) -->
+<div class="progress-steps">
+    <div class="steps">
+        <a href="flights.html" class="step completed">
+            <div class="step-circle">✓</div>
+            <span>Flight</span>
+        </a>
+        <div class="step-line"></div>
+        <a href="passenger_details.html" class="step completed">
+            <div class="step-circle">✓</div>
+            <span>Passenger</span>
+        </a>
+        <div class="step-line"></div>
+        <span class="step active">
+            <div class="step-circle">3</div>
+            <span>Add-ons</span>
+        </span>
+        <div class="step-line"></div>
+        <a href="seat_selection.html" class="step">
+            <div class="step-circle">4</div>
+            <span>Seat</span>
+        </a>
+        <div class="step-line"></div>
+        <a href="summary.html" class="step">
+            <div class="step-circle">5</div>
+            <span>Summary</span>
+        </a>
+        <div class="step-line"></div>
+        <a href="payment.html" class="step">
+            <div class="step-circle">6</div>
+            <span>Payment</span>
+        </a>
+    </div>
+</div>
+
+<!-- Main Container -->
+<div class="container">
+    <div class="two-columns">
+        <!-- LEFT PANEL: Add-ons Options -->
+        <div class="left-panel">
+            <!-- Meal Preference Card -->
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-utensils"></i>
+                    <h3>Meal Preference</h3>
+                    <span class="card-badge">Recommended</span>
+                </div>
+                <div class="meal-buttons" id="mealGroup"></div>
+                <div id="mealMessage" class="meal-message"></div>
+                <div class="card-footer-note">
+                    <i class="fas fa-info-circle"></i> Special meals available upon request (Jain, Diabetic, Kosher)
+                </div>
+            </div>
+
+            <!-- Extra Baggage Card -->
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-suitcase-rolling"></i>
+                    <h3>Extra Baggage</h3>
+                    <span class="card-badge">Popular</span>
+                </div>
+                <div class="option-row">
+                    <div class="option-info">
+                        <i class="fas fa-weight-hanging option-icon"></i>
+                        <div>
+                            <div class="option-title">+10 kg Extra Baggage</div>
+                            <div class="option-desc">Perfect for shopping trips</div>
+                        </div>
+                    </div>
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="baggage10" class="baggage-checkbox">
+                        <span class="checkmark"></span>
+                        <span class="price-tag">+₹800</span>
+                    </label>
+                </div>
+                <div class="option-row">
+                    <div class="option-info">
+                        <i class="fas fa-weight-hanging option-icon"></i>
+                        <div>
+                            <div class="option-title">+20 kg Extra Baggage</div>
+                            <div class="option-desc">Best value for long trips</div>
+                        </div>
+                    </div>
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="baggage20" class="baggage-checkbox">
+                        <span class="checkmark"></span>
+                        <span class="price-tag">+₹1500</span>
+                    </label>
+                </div>
+                <div class="default-info">
+                    <i class="fas fa-info-circle"></i> Default: 7kg cabin + 15kg check-in included
+                </div>
+            </div>
+
+            <!-- Travel Insurance Card -->
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Travel Insurance</h3>
+                    <span class="card-badge premium">Protection</span>
+                </div>
+                <div class="insurance-content">
+                    <div class="insurance-features">
+                        <div class="feature-chip"><i class="fas fa-clock"></i> Flight Delay</div>
+                        <div class="feature-chip"><i class="fas fa-briefcase"></i> Baggage Loss</div>
+                        <div class="feature-chip"><i class="fas fa-ambulance"></i> Medical Emergency</div>
+                        <div class="feature-chip"><i class="fas fa-plane-slash"></i> Trip Cancellation</div>
+                    </div>
+                    <div class="option-row">
+                        <div class="option-info">
+                            <i class="fas fa-check-circle option-icon"></i>
+                            <div>
+                                <div class="option-title">Comprehensive Travel Insurance</div>
+                                <div class="option-desc">Covers trip cancellation, medical emergencies, baggage loss, flight delays</div>
+                            </div>
+                        </div>
+                        <label class="checkbox-container">
+                            <input type="checkbox" id="insuranceCheck" class="insurance-checkbox">
+                            <span class="checkmark"></span>
+                            <span class="price-tag">+₹200</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Priority Services Card -->
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-concierge-bell"></i>
+                    <h3>Priority Services</h3>
+                    <span class="card-badge">Premium</span>
+                </div>
+                <div class="option-row">
+                    <div class="option-info">
+                        <i class="fas fa-door-open option-icon"></i>
+                        <div>
+                            <div class="option-title">Priority Boarding</div>
+                            <div class="option-desc">Board early and settle in comfortably</div>
+                        </div>
+                    </div>
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="priorityBoarding" class="priority-checkbox">
+                        <span class="checkmark"></span>
+                        <span class="price-tag">+₹300</span>
+                    </label>
+                </div>
+                <div class="option-row">
+                    <div class="option-info">
+                        <i class="fas fa-clock option-icon"></i>
+                        <div>
+                            <div class="option-title">Fast Track Check-in</div>
+                            <div class="option-desc">Skip the queues at the airport</div>
+                        </div>
+                    </div>
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="fastCheckin" class="priority-checkbox">
+                        <span class="checkmark"></span>
+                        <span class="price-tag">+₹200</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Premium Add-ons Card -->
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-gem"></i>
+                    <h3>Premium Add-ons</h3>
+                    <span class="card-badge">Luxury</span>
+                </div>
+                <div class="option-row">
+                    <div class="option-info">
+                        <i class="fas fa-wifi option-icon"></i>
+                        <div>
+                            <div class="option-title">In-flight Wi-Fi</div>
+                            <div class="option-desc">Stay connected at 35,000 feet</div>
+                        </div>
+                    </div>
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="wifiCheck" class="premium-checkbox">
+                        <span class="checkmark"></span>
+                        <span class="price-tag">+₹400</span>
+                    </label>
+                </div>
+                <div class="option-row">
+                    <div class="option-info">
+                        <i class="fas fa-champagne-glasses option-icon"></i>
+                        <div>
+                            <div class="option-title">Airport Lounge Access</div>
+                            <div class="option-desc">Relax in premium lounges with complimentary food & drinks</div>
+                        </div>
+                    </div>
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="loungeCheck" class="premium-checkbox">
+                        <span class="checkmark"></span>
+                        <span class="price-tag">+₹1200</span>
+                    </label>
+                </div>
+                <div class="option-row" id="extraLegroomRow">
+                    <div class="option-info">
+                        <i class="fas fa-arrow-up option-icon"></i>
+                        <div>
+                            <div class="option-title">Extra Legroom Seat</div>
+                            <div class="option-desc">More space for your comfort</div>
+                        </div>
+                    </div>
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="legroomCheck" class="premium-checkbox">
+                        <span class="checkmark"></span>
+                        <span class="price-tag">+₹600</span>
+                    </label>
+                </div>
+                <div class="note-info">
+                    <i class="fas fa-info-circle"></i> Extra legroom already included in Business class
+                </div>
+            </div>
+
+            <!-- Special Assistance Card -->
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-hand-holding-heart"></i>
+                    <h3>Special Assistance</h3>
+                    <span class="card-badge">Care</span>
+                </div>
+                <div class="assistance-select">
+                    <select id="specialAssist">
+                        <option value="none">No assistance needed</option>
+                        <option value="wheelchair">♿ Wheelchair Assistance</option>
+                        <option value="senior">👴 Senior Citizen Assistance</option>
+                        <option value="infant">👶 Infant Assistance (Baby care)</option>
+                        <option value="medical">🏥 Medical Assistance</option>
+                        <option value="unaccompanied">🧸 Unaccompanied Minor</option>
+                    </select>
+                </div>
+                <div class="card-footer-note">
+                    <i class="fas fa-clock"></i> Request at least 48 hours before departure
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT PANEL: Trip Summary & Price -->
+        <div class="right-panel">
+            <div class="summary-card">
+                <div class="summary-header">
+                    <i class="fas fa-ticket-alt"></i>
+                    <h3>Trip Summary</h3>
+                    <span class="summary-badge">Review & Confirm</span>
+                </div>
+
+                <div class="summary-section">
+                    <div class="summary-title">
+                        <i class="fas fa-plane"></i>
+                        <span>Flight Details</span>
+                    </div>
+                    <div id="flightSummary" class="summary-content"></div>
+                </div>
+
+                <div class="summary-section">
+                    <div class="summary-title">
+                        <i class="fas fa-users"></i>
+                        <span>Passengers & Seats</span>
+                    </div>
+                    <div id="passengerSummary" class="summary-content"></div>
+                </div>
+
+                <div class="summary-section">
+                    <div class="summary-title">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>Selected Add-ons</span>
+                    </div>
+                    <div id="addonsSummary" class="summary-content">
+                        <div class="empty-addons">
+                            <i class="fas fa-plus-circle"></i>
+                            <span>No add-ons selected yet</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="price-breakdown" id="priceBreakdown"></div>
+
+                <div class="warning-note">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <span>Add-ons are non-refundable once booked</span>
+                </div>
+
+                <button class="btn-back" id="backBtn">
+                    <i class="fas fa-arrow-left"></i> Back to Passenger Details
+                </button>
+                <button class="btn-continue" id="continueBtn">
+                    Continue to Seat Selection <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="../js/addons.js"></script>
+</body>
+</html>

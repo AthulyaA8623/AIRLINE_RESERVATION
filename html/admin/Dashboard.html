@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Airline Admin</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="../../css/Dashboard.css">
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo"><h2><i class="fas fa-plane"></i> Airline Admin</h2></div>
+        <div class="nav-links">
+            <a href="Dashboard.html" class="active"><i class="fas fa-chart-line"></i> Dashboard</a>
+            <a href="Addflight.html"><i class="fas fa-plus-circle"></i> Add Flight</a>
+            <a href="Updateflight.html"><i class="fas fa-pen-alt"></i> Update Flight</a>
+            <a href="Deleteflight.html"><i class="fas fa-trash-alt"></i> Delete Flight</a>
+            <a href="viewflight.html"><i class="fas fa-list-ul"></i> View Flights</a>
+            <a href="viewbook.html"><i class="fas fa-ticket-alt"></i> View Bookings</a>
+            <a href="seat.html"><i class="fas fa-chair"></i> Seat Mgmt</a>
+            <a href="logout.html"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </div>
+    </div>
+    <div class="container">
+        <div class="page-header">
+            <h1><i class="fas fa-chart-line"></i> Dashboard Overview</h1>
+            <p>Welcome, Administrator! Here's your flight management summary</p>
+        </div>
+        
+        <!-- Stats Cards Grid -->
+        <div class="stats-grid" id="statsGrid"></div>
+        
+        <!-- Recent Flights Section -->
+        <div class="recent-section">
+            <div class="section-header">
+                <h2 class="section-title"><i class="fas fa-plane-departure"></i> Recent Flights</h2>
+                <a href="viewflight.html" class="view-all">View All <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="recent-flights-table" id="recentFlightsTable">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Flight No</th>
+                            <th>Airline</th>
+                            <th>Route</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Price</th>
+                            <th>Seats</th>
+                        </tr>
+                    </thead>
+                    <tbody id="recentFlightsBody">
+                        <tr><td colspan="7" class="loading-text">Loading flights...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="../../js/Dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Payment | BlueSky Airlines</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/payment.css">
+</head>
+<body>
+
+<!-- Navbar -->
+<div class="navbar">
+    <div class="nav-container">
+        <div class="logo"><i class="fas fa-plane-departure"></i> BlueSky</div>
+        <div class="nav-links">
+            <a href="#" id="homeNav">Home</a>
+            <a href="#" id="passengerDetailsNav">Passenger Details</a>
+        </div>
+        <div class="auth-buttons">
+            <button class="btn-login" id="loginBtn">Login</button>
+            <button class="btn-signup" id="signupBtn">Sign Up</button>
+        </div>
+    </div>
+</div>
+
+<!-- Progress Steps (Step 6 Active - Payment) -->
+<div class="progress-steps">
+    <div class="steps">
+        <a href="flights.html" class="step completed">
+            <div class="step-circle">✓</div>
+            <span>Flight</span>
+        </a>
+        <div class="step-line"></div>
+        <a href="passenger_details.html" class="step completed">
+            <div class="step-circle">✓</div>
+            <span>Passenger</span>
+        </a>
+        <div class="step-line"></div>
+        <a href="addons.html" class="step completed">
+            <div class="step-circle">✓</div>
+            <span>Add-ons</span>
+        </a>
+        <div class="step-line"></div>
+        <a href="seat_selection.html" class="step completed">
+            <div class="step-circle">✓</div>
+            <span>Seat</span>
+        </a>
+        <div class="step-line"></div>
+        <a href="summary.html" class="step completed">
+            <div class="step-circle">✓</div>
+            <span>Summary</span>
+        </a>
+        <div class="step-line"></div>
+        <span class="step active">
+            <div class="step-circle">6</div>
+            <span>Payment</span>
+        </span>
+    </div>
+</div>
+
+<!-- Main Container -->
+<div class="container">
+    <!-- Payment Card -->
+    <div class="payment-card">
+        <div class="payment-header">
+            <i class="fas fa-credit-card"></i>
+            <h2>Secure Payment</h2>
+            <span class="secure-badge"><i class="fas fa-lock"></i> 256-bit SSL Secure</span>
+        </div>
+
+        <!-- Amount Card -->
+        <div class="amount-card">
+            <div class="amount-label">Total Amount to Pay</div>
+            <div class="amount-value" id="totalAmount">₹0</div>
+            <div class="amount-note">Inclusive of all taxes & fees</div>
+        </div>
+
+        <!-- Payment Methods -->
+        <div class="payment-methods">
+            <h3>Select Payment Method</h3>
+            <div class="methods-grid" id="methodsGrid">
+                <div class="method-card" data-method="upi">
+                    <div class="method-icon"><i class="fab fa-google-pay"></i></div>
+                    <div class="method-info">
+                        <div class="method-name">UPI</div>
+                        <div class="method-desc">Google Pay, PhonePe, Paytm, BHIM</div>
+                    </div>
+                    <div class="method-radio"></div>
+                </div>
+                <div class="method-card" data-method="card">
+                    <div class="method-icon"><i class="fas fa-credit-card"></i></div>
+                    <div class="method-info">
+                        <div class="method-name">Credit / Debit Card</div>
+                        <div class="method-desc">Visa, MasterCard, RuPay, Amex</div>
+                    </div>
+                    <div class="method-radio"></div>
+                </div>
+                <div class="method-card" data-method="netbanking">
+                    <div class="method-icon"><i class="fas fa-university"></i></div>
+                    <div class="method-info">
+                        <div class="method-name">Net Banking</div>
+                        <div class="method-desc">All major banks</div>
+                    </div>
+                    <div class="method-radio"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Payment Form Container -->
+        <div id="paymentFormContainer"></div>
+
+        <!-- Pay Button -->
+        <button class="pay-btn" id="payBtn" disabled>
+            <i class="fas fa-lock"></i> Pay Now
+        </button>
+
+        <div class="secure-footer">
+            <i class="fas fa-shield-alt"></i>
+            <span>Your payment information is encrypted and secure</span>
+        </div>
+    </div>
+</div>
+
+<script src="../js/payment.js"></script>
+</body>
+</html>

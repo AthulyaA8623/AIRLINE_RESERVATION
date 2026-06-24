@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>SkyWay Airlines | Fly Smart, Fly Safe</title>
+    <link rel="stylesheet" href="../css/index.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- Preloader -->
+<div class="preloader" id="preloader">
+    <div class="loader">
+        <div class="plane">
+            <i class="fas fa-plane"></i>
+        </div>
+        <div class="runway"></div>
+    </div>
+</div>
+
+<!-- Navigation Bar -->
+<nav class="navbar" id="navbar">
+    <div class="nav-container">
+        <div class="logo">
+            <div class="logo-icon">
+                <i class="fas fa-plane-departure"></i>
+                <div class="logo-glow"></div>
+            </div>
+            <h1>SkyWay</h1>
+        </div>
+        <div class="nav-links">
+    <a href="index.html" class="active"><i class="fas fa-home"></i> Home</a>
+    <a href="flights.html"><i class="fas fa-plane"></i> Flights</a>
+    <a href="my_bookings.html"><i class="fas fa-ticket-alt"></i> My Bookings</a>
+    <a href="offers.html"><i class="fas fa-gift"></i> Offers</a>
+    <a href="support.html"><i class="fas fa-headset"></i> Support</a>
+</div>
+        <div class="auth-buttons" id="authButtons">
+            <button class="btn-outline" id="loginBtn"><i class="fas fa-user"></i> Login</button>
+            <button class="btn-primary" id="signupBtn"><i class="fas fa-user-plus"></i> Sign Up</button>
+            <button class="btn-guest" id="guestBtn"><i class="fas fa-user-friends"></i> Guest</button>
+        </div>
+        <div class="mobile-menu" id="mobileMenu">
+            <i class="fas fa-bars"></i>
+        </div>
+    </div>
+</nav>
+
+<!-- Hero Section with Video Background -->
+<section class="hero">
+    <video autoplay muted loop id="heroVideo">
+        <source src="https://cdn.pixabay.com/video/2021/08/25/87294-592103936_large.mp4" type="video/mp4">
+    </video>
+    <div class="hero-overlay"></div>
+    <div class="hero-content" data-aos="fade-up" data-aos-duration="1000">
+        <div class="hero-badge">
+            <span class="badge-pulse"></span>
+            <span>✈️ 20% OFF on First Booking</span>
+        </div>
+        <h1>Explore the World<br>with <span class="gradient-text">SkyWay</span></h1>
+        <p>India's most loved airline | 100+ Destinations | Best Price Guarantee</p>
+        <div class="hero-stats">
+            <div class="stat">
+                <i class="fas fa-globe-asia"></i>
+                <span>100+</span>
+                <small>Destinations</small>
+            </div>
+            <div class="stat">
+                <i class="fas fa-smile"></i>
+                <span>10M+</span>
+                <small>Happy Customers</small>
+            </div>
+            <div class="stat">
+                <i class="fas fa-calendar-alt"></i>
+                <span>24/7</span>
+                <small>Support</small>
+            </div>
+        </div>
+    </div>
+    <div class="scroll-indicator">
+        <div class="mouse"></div>
+        <span>Scroll Down</span>
+    </div>
+</section>
+
+<!-- Search Container -->
+<div class="search-container-wrapper" data-aos="fade-up" data-aos-delay="200">
+    <div class="search-container">
+        <div class="search-tabs">
+            <button class="tab-btn active" data-tab="oneway">
+                <i class="fas fa-arrow-right"></i> One Way
+            </button>
+            <button class="tab-btn" data-tab="roundtrip">
+                <i class="fas fa-exchange-alt"></i> Round Trip
+            </button>
+            <button class="tab-btn" data-tab="multicity">
+                <i class="fas fa-map-marker-alt"></i> Multi City
+            </button>
+        </div>
+        
+        <div class="search-form">
+            <div class="form-row">
+                <div class="form-group">
+                    <label><i class="fas fa-map-marker-alt"></i> From</label>
+                    <div class="input-wrapper">
+                        <input type="text" id="fromCity" placeholder="City or Airport" value="Chennai (MAA)">
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
+                <div class="swap-icon" id="swapIcon">
+                    <i class="fas fa-arrows-alt-h"></i>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-location-dot"></i> To</label>
+                    <div class="input-wrapper">
+                        <input type="text" id="toCity" placeholder="City or Airport" value="Delhi (DEL)">
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label><i class="far fa-calendar-alt"></i> Departure</label>
+                    <input type="date" id="travelDate" class="date-input">
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-user-friends"></i> Passengers</label>
+                    <div class="passenger-selector">
+                        <input type="text" id="passengerDisplay" readonly value="1 Adult">
+                        <div class="passenger-dropdown" id="passengerDropdown">
+                            <div class="passenger-item">
+                                <div class="passenger-info">
+                                    <span class="passenger-type">Adults</span>
+                                    <span class="age-info">12+ yrs</span>
+                                </div>
+                                <div class="counter">
+                                    <button class="counter-btn" data-type="adult" data-op="minus">-</button>
+                                    <span id="adultCount">1</span>
+                                    <button class="counter-btn" data-type="adult" data-op="plus">+</button>
+                                </div>
+                            </div>
+                            <div class="passenger-item">
+                                <div class="passenger-info">
+                                    <span class="passenger-type">Children</span>
+                                    <span class="age-info">2-12 yrs</span>
+                                </div>
+                                <div class="counter">
+                                    <button class="counter-btn" data-type="child" data-op="minus">-</button>
+                                    <span id="childCount">0</span>
+                                    <button class="counter-btn" data-type="child" data-op="plus">+</button>
+                                </div>
+                            </div>
+                            <div class="passenger-item">
+                                <div class="passenger-info">
+                                    <span class="passenger-type">Infants</span>
+                                    <span class="age-info">0-2 yrs</span>
+                                </div>
+                                <div class="counter">
+                                    <button class="counter-btn" data-type="infant" data-op="minus">-</button>
+                                    <span id="infantCount">0</span>
+                                    <button class="counter-btn" data-type="infant" data-op="plus">+</button>
+                                </div>
+                            </div>
+                            <div class="passenger-actions">
+                                <button class="btn-cancel" id="cancelPassenger">Cancel</button>
+                                <button class="btn-apply" id="applyPassenger">Apply</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-ticket-alt"></i> Cabin Class</label>
+                    <select id="cabinClass">
+                        <option value="economy">Economy</option>
+                        <option value="business">Business</option>
+                    </select>
+                </div>
+            </div>
+            
+            <button class="search-flight-btn" id="searchFlightsBtn">
+                <i class="fas fa-search"></i> Search Flights
+                <span class="btn-glow"></span>
+            </button>
+            <div id="searchError" class="error-message"></div>
+        </div>
+    </div>
+</div>
+
+<!-- Quick Book Section -->
+<div class="quick-book" data-aos="fade-up">
+    <div class="quick-book-container">
+        <div class="quick-book-text">
+            <i class="fas fa-bolt"></i>
+            <h3>Quick Book</h3>
+            <p>Book your last-minute flight in seconds</p>
+        </div>
+        <div class="quick-book-input">
+            <input type="text" placeholder="Enter PNR / Booking ID">
+            <button class="quick-book-btn">Retrieve Booking</button>
+        </div>
+    </div>
+</div>
+
+<!-- Features Section with Animation -->
+<section class="features">
+    <div class="section-title" data-aos="fade-up">
+        <span class="subtitle">Why Choose Us</span>
+        <h2>Experience the <span class="gradient-text">SkyWay Difference</span></h2>
+        <p>Making your journey comfortable, affordable, and memorable</p>
+    </div>
+    <div class="features-grid">
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+            <div class="feature-icon">
+                <i class="fas fa-wifi"></i>
+                <div class="icon-bg"></div>
+            </div>
+            <h3>Free High-Speed Wi-Fi</h3>
+            <p>Stay connected throughout your journey with complimentary high-speed internet</p>
+            <span class="feature-tag">Complimentary</span>
+        </div>
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+            <div class="feature-icon">
+                <i class="fas fa-utensils"></i>
+                <div class="icon-bg"></div>
+            </div>
+            <h3>Gourmet Meals</h3>
+            <p>Delicious chef-curated meals with vegetarian and non-vegetarian options</p>
+            <span class="feature-tag">Premium</span>
+        </div>
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
+            <div class="feature-icon">
+                <i class="fas fa-suitcase-rolling"></i>
+                <div class="icon-bg"></div>
+            </div>
+            <h3>Extra Baggage Allowance</h3>
+            <p>Up to 30kg check-in + 10kg cabin baggage for all passengers</p>
+            <span class="feature-tag">Best in Class</span>
+        </div>
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="400">
+            <div class="feature-icon">
+                <i class="fas fa-headset"></i>
+                <div class="icon-bg"></div>
+            </div>
+            <h3>24/7 Customer Support</h3>
+            <p>Round-the-clock assistance for all your travel needs</p>
+            <span class="feature-tag">Always Here</span>
+        </div>
+    </div>
+</section>
+
+<!-- Popular Routes Section -->
+<section class="popular-routes">
+    <div class="section-title" data-aos="fade-up">
+        <span class="subtitle">Popular Routes</span>
+        <h2>Most Booked <span class="gradient-text">Destinations</span></h2>
+        <p>Discover the most loved routes by our passengers</p>
+    </div>
+    <div class="routes-slider" id="routesSlider">
+        <div class="routes-container">
+            <div class="route-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="route-image">
+                    <img src="https://images.unsplash.com/photo-1587925358603-c2eea5305bbc?w=400&h=300&fit=crop" alt="Delhi">
+                    <div class="route-overlay"></div>
+                </div>
+                <div class="route-info">
+                    <div class="route-cities">
+                        <span>Delhi</span>
+                        <i class="fas fa-arrow-right"></i>
+                        <span>Mumbai</span>
+                    </div>
+                    <div class="route-stats">
+                        <span><i class="fas fa-clock"></i> 2h 15m</span>
+                        <span class="route-price">From ₹3,499</span>
+                    </div>
+                </div>
+            </div>
+            <div class="route-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="route-image">
+                    <img src="https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=400&h=300&fit=crop" alt="Bangalore">
+                    <div class="route-overlay"></div>
+                </div>
+                <div class="route-info">
+                    <div class="route-cities">
+                        <span>Bangalore</span>
+                        <i class="fas fa-arrow-right"></i>
+                        <span>Chennai</span>
+                    </div>
+                    <div class="route-stats">
+                        <span><i class="fas fa-clock"></i> 1h 10m</span>
+                        <span class="route-price">From ₹2,199</span>
+                    </div>
+                </div>
+            </div>
+            <div class="route-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="route-image">
+                    <img src="https://images.unsplash.com/photo-1533929736458-ca588d08c8be?w=400&h=300&fit=crop" alt="Kolkata">
+                    <div class="route-overlay"></div>
+                </div>
+                <div class="route-info">
+                    <div class="route-cities">
+                        <span>Kolkata</span>
+                        <i class="fas fa-arrow-right"></i>
+                        <span>Delhi</span>
+                    </div>
+                    <div class="route-stats">
+                        <span><i class="fas fa-clock"></i> 2h 30m</span>
+                        <span class="route-price">From ₹3,999</span>
+                    </div>
+                </div>
+            </div>
+            <div class="route-card" data-aos="fade-up" data-aos-delay="400">
+                <div class="route-image">
+                    <img src="https://images.unsplash.com/photo-1596176530529-78163a4f7af2?w=400&h=300&fit=crop" alt="Goa">
+                    <div class="route-overlay"></div>
+                </div>
+                <div class="route-info">
+                    <div class="route-cities">
+                        <span>Mumbai</span>
+                        <i class="fas fa-arrow-right"></i>
+                        <span>Goa</span>
+                    </div>
+                    <div class="route-stats">
+                        <span><i class="fas fa-clock"></i> 1h 20m</span>
+                        <span class="route-price">From ₹2,899</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Flight Results Section -->
+<div class="flights-section" id="flightsSection">
+    <div class="section-title" data-aos="fade-up">
+        <span class="subtitle">Best Deals</span>
+        <h2>Recommended <span class="gradient-text">Flights</span></h2>
+        <p>Hand-picked flights at the best prices for you</p>
+    </div>
+    <div id="flightResults" class="flight-cards">
+        <!-- Dynamic flight cards will appear here -->
+    </div>
+</div>
+
+<!-- Offer Banner -->
+<div class="offer-banner" data-aos="zoom-in">
+    <div class="offer-content">
+        <div class="offer-text">
+            <span class="offer-tag">Limited Time Offer</span>
+            <h3>Get Up to 30% Off</h3>
+            <p>on your first booking using code: <strong>SKYWAY30</strong></p>
+        </div>
+        <button class="offer-btn">Book Now <i class="fas fa-arrow-right"></i></button>
+    </div>
+</div>
+
+<!-- Testimonials Section -->
+<section class="testimonials">
+    <div class="section-title" data-aos="fade-up">
+        <span class="subtitle">Testimonials</span>
+        <h2>What Our <span class="gradient-text">Customers Say</span></h2>
+        <p>Join millions of happy travelers who trust SkyWay</p>
+    </div>
+    <div class="testimonials-slider" id="testimonialsSlider">
+        <div class="testimonial-card" data-aos="fade-up" data-aos-delay="100">
+            <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+            <p>"Amazing experience! The staff was very friendly and the flight was on time. Highly recommend SkyWay!"</p>
+            <div class="customer-info">
+                <img src="https://randomuser.me/api/portraits/women/1.jpg" alt="Customer">
+                <div>
+                    <h4>Priya Sharma</h4>
+                    <div class="rating">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="testimonial-card" data-aos="fade-up" data-aos-delay="200">
+            <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+            <p>"Best airline in India! Comfortable seats, great food, and excellent service. Will definitely fly again!"</p>
+            <div class="customer-info">
+                <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="Customer">
+                <div>
+                    <h4>Rajesh Kumar</h4>
+                    <div class="rating">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="testimonial-card" data-aos="fade-up" data-aos-delay="300">
+            <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+            <p>"Booking was super easy and the prices are unbeatable. The app is very user-friendly. 10/10 experience!"</p>
+            <div class="customer-info">
+                <img src="https://randomuser.me/api/portraits/women/2.jpg" alt="Customer">
+                <div>
+                    <h4>Ananya Mehta</h4>
+                    <div class="rating">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Newsletter Section -->
+<section class="newsletter">
+    <div class="newsletter-container" data-aos="fade-up">
+        <div class="newsletter-content">
+            <i class="fas fa-envelope-open-text"></i>
+            <h3>Subscribe to Our Newsletter</h3>
+            <p>Get exclusive deals, travel tips, and early access to offers</p>
+            <div class="newsletter-form">
+                <input type="email" placeholder="Enter your email address">
+                <button>Subscribe <i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer - Updated with working links -->
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-section">
+            <div class="logo">
+                <i class="fas fa-plane-departure"></i>
+                <h3>SkyWay Airlines</h3>
+            </div>
+            <p>India's most loved airline, connecting you to over 100 destinations worldwide with exceptional service and comfort.</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+        
+        <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="faq.html">FAQs</a></li>
+                <li><a href="#">Terms & Conditions</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Careers</a></li>
+            </ul>
+        </div>
+        
+        <div class="footer-section">
+            <h3>Services</h3>
+            <ul>
+                <li><a href="flight-status.html">Flight Status</a></li>
+                <li><a href="#">Check-in</a></li>
+                <li><a href="#">Baggage Info</a></li>
+                <li><a href="#">Cargo Services</a></li>
+                <li><a href="#">Group Booking</a></li>
+                <li><a href="#">Corporate Travel</a></li>
+            </ul>
+        </div>
+        
+        <div class="footer-section">
+            <h3>Contact Info</h3>
+            <ul class="contact-info">
+                <li><i class="fas fa-phone-alt"></i> +91 12345 67890</li>
+                <li><i class="fas fa-envelope"></i> support@skyway.com</li>
+                <li><i class="fas fa-map-marker-alt"></i> 123, Aviation Hub, New Delhi - 110001</li>
+            </ul>
+            <div class="app-buttons">
+                <a href="#"><i class="fab fa-google-play"></i> Google Play</a>
+                <a href="#"><i class="fab fa-apple"></i> App Store</a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2026 SkyWay Airlines. All rights reserved. | Designed with <i class="fas fa-heart"></i> for your journey</p>
+    </div>
+</footer>
+
+<!-- Back to Top Button -->
+<button id="backToTop" class="back-to-top">
+    <i class="fas fa-arrow-up"></i>
+</button>
+
+<div id="successToast" class="success-toast"></div>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="../js/index.js"></script>
+</body>
+</html>

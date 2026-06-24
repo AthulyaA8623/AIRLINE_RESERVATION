@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Flight - Airline Admin</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="../../css/Addflight.css">
+</head>
+
+<body>
+    <div class="navbar">
+        <div class="logo">
+            <h2><i class="fas fa-plane"></i> Airline Admin</h2>
+        </div>
+        <div class="nav-links">
+            <a href="Dashboard.html"><i class="fas fa-chart-line"></i> Dashboard</a>
+            <a href="Addflight.html" class="active"><i class="fas fa-plus-circle"></i> Add Flight</a>
+            <a href="Updateflight.html"><i class="fas fa-pen-alt"></i> Update Flight</a>
+            <a href="Deleteflight.html"><i class="fas fa-trash-alt"></i> Delete Flight</a>
+            <a href="viewflight.html"><i class="fas fa-list-ul"></i> View Flights</a>
+            <a href="viewbook.html"><i class="fas fa-ticket-alt"></i> View Bookings</a>
+            <a href="seat.html"><i class="fas fa-chair"></i> Seat Mgmt</a>
+            <a href="logout.html"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="page-header">
+            <h1><i class="fas fa-plus-circle"></i> Add New Flight</h1>
+            <p>Fill in the details below to add a new flight to the system</p>
+        </div>
+
+        <div class="form-card">
+            <div class="form-grid">
+                <div class="input-group">
+                    <label><i class="fas fa-hashtag"></i> Flight Number *</label>
+                    <input id="flightNo" placeholder="e.g., AI202, 6E501" autocomplete="off">
+                    <small class="input-hint">Unique flight identifier</small>
+                </div>
+
+                <div class="input-group">
+                    <label><i class="fas fa-building"></i> Airline *</label>
+                    <input id="airline" placeholder="e.g., Air India, Indigo" autocomplete="off">
+                </div>
+
+                <div class="input-group">
+                    <label><i class="fas fa-map-marker-alt"></i> From (Origin) *</label>
+                    <input id="fromCity" placeholder="e.g., Delhi, Mumbai" autocomplete="off">
+                </div>
+
+                <div class="input-group">
+                    <label><i class="fas fa-location-dot"></i> To (Destination) *</label>
+                    <input id="toCity" placeholder="e.g., New York, London" autocomplete="off">
+                </div>
+
+                <div class="input-group">
+                    <label><i class="fas fa-calendar-alt"></i> Departure Date *</label>
+                    <input type="date" id="date">
+                </div>
+
+                <div class="input-group">
+                    <label><i class="fas fa-clock"></i> Departure Time *</label>
+                    <input type="time" id="time">
+                </div>
+
+                <div class="input-group">
+                    <label><i class="fas fa-rupee-sign"></i> Ticket Price (₹) *</label>
+                    <input type="number" id="price" placeholder="4500" step="1" min="0">
+                </div>
+
+                <div class="input-group">
+                    <label><i class="fas fa-chair"></i> Available Seats *</label>
+                    <input type="number" id="seats" value="40" min="1" max="500" step="1">
+                    <small class="input-hint">Maximum 500 seats</small>
+                </div>
+            </div>
+
+            <button id="addBtn"><i class="fas fa-save"></i> Add Flight</button>
+            <div id="message"></div>
+        </div>
+
+        <!-- Preview section -->
+        <div id="previewContainer" class="preview-card hidden">
+            <div class="preview-header">
+                <i class="fas fa-check-circle"></i>
+                <strong>Last Added Flight</strong>
+            </div>
+            <div class="flight-preview-info">
+                <p><span id="previewFlightNo">---</span> | <span id="previewAirline">---</span></p>
+                <p><i class="fas fa-arrow-right"></i> <span id="previewRoute"></span></p>
+                <p><i class="far fa-calendar-alt"></i> <span id="previewDateTime"></span></p>
+                <p><i class="fas fa-rupee-sign"></i> ₹<span id="previewPrice"></span> | <i class="fas fa-chair"></i> Seats: <span id="previewSeats"></span></p>
+            </div>
+            <button id="clearPreviewBtn" class="clear-preview"><i class="fas fa-times"></i> Dismiss</button>
+        </div>
+    </div>
+
+    <script src="../../js/Addflight.js"></script>
+</body>
+
+</html>

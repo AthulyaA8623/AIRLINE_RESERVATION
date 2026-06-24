@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support | SkyWay Airlines</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1E3A5F;
+            --secondary: #F05A28;
+            --gray: #64748b;
+            --light-gray: #f8fafc;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Poppins', sans-serif;
+            background: var(--light-gray);
+        }
+
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: var(--white);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .nav-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo i {
+            font-size: 1.8rem;
+            color: var(--secondary);
+        }
+
+        .logo h1 {
+            font-size: 1.6rem;
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--gray);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--secondary);
+        }
+
+        .back-home {
+            background: var(--secondary);
+            color: white;
+            padding: 0.5rem 1.2rem;
+            border-radius: 8px;
+            text-decoration: none;
+        }
+
+        .back-home:hover {
+            background: #d94a1a;
+            color: white;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, var(--primary), #0F2B44);
+            color: white;
+            padding: 120px 2rem 4rem;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .page-header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* Support Container */
+        .support-container {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+
+        /* Contact Grid */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .contact-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .contact-card i {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .contact-card h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-card p {
+            color: var(--gray);
+            margin-bottom: 0.3rem;
+        }
+
+        /* Complaint Form */
+        .complaint-form {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .complaint-form h2 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group input, 
+        .form-group select, 
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--secondary);
+        }
+
+        .submit-btn {
+            background: var(--secondary);
+            color: white;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 8px;
+            width: 100%;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: #d94a1a;
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--primary);
+            color: white;
+            padding: 3rem 2rem 1rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: #10b981;
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            display: none;
+            z-index: 1100;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            .page-header h1 {
+                font-size: 2rem;
+            }
+            .complaint-form {
+                margin: 0 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="logo">
+            <i class="fas fa-plane-departure"></i>
+            <h1>SkyWay</h1>
+        </div>
+        <div class="nav-links">
+            <a href="index.html"><i class="fas fa-home"></i> Home</a>
+            <a href="#"><i class="fas fa-plane"></i> Flights</a>
+            <a href="#"><i class="fas fa-ticket-alt"></i> My Bookings</a>
+            <a href="offers.html"><i class="fas fa-gift"></i> Offers</a>
+            <a href="support.html" class="active"><i class="fas fa-headset"></i> Support</a>
+            <a href="index.html" class="back-home"><i class="fas fa-arrow-left"></i> Back to Home</a>
+        </div>
+    </div>
+</nav>
+
+<div class="page-header">
+    <h1>📞 24/7 Customer Support</h1>
+    <p>We're here to help you anytime, anywhere</p>
+</div>
+
+<div class="support-container">
+    
+    <!-- Contact Cards -->
+    <div class="contact-grid">
+        <div class="contact-card">
+            <i class="fas fa-phone-alt"></i>
+            <h3>Call Us</h3>
+            <p>Toll Free: 1800-123-4567</p>
+            <p>International: +91-12345-67890</p>
+            <p>Available 24/7</p>
+        </div>
+        <div class="contact-card">
+            <i class="fas fa-envelope"></i>
+            <h3>Email Us</h3>
+            <p>support@skyway.com</p>
+            <p>bookings@skyway.com</p>
+            <p>Response within 2 hours</p>
+        </div>
+        <div class="contact-card">
+            <i class="fas fa-comments"></i>
+            <h3>Live Chat</h3>
+            <p>Chat with our support team</p>
+            <p>Available 6 AM - 12 AM IST</p>
+            <p>Instant responses</p>
+        </div>
+    </div>
+
+    <!-- Complaint / Query Form -->
+    <div class="complaint-form">
+        <h2>📝 Raise a Complaint / Query</h2>
+        <form id="supportForm">
+            <div class="form-group">
+                <input type="text" id="name" placeholder="Your Name" required>
+            </div>
+            <div class="form-group">
+                <input type="email" id="email" placeholder="Your Email" required>
+            </div>
+            <div class="form-group">
+                <input type="text" id="mobile" placeholder="Mobile Number" required>
+            </div>
+            <div class="form-group">
+                <input type="text" id="pnr" placeholder="PNR Number (Optional)">
+            </div>
+            <div class="form-group">
+                <select id="issueType">
+                    <option value="">Select Issue Type</option>
+                    <option>Booking Issue</option>
+                    <option>Payment Issue</option>
+                    <option>Cancellation/Refund</option>
+                    <option>Baggage Issue</option>
+                    <option>Flight Delay/Cancellation</option>
+                    <option>Seat Selection Issue</option>
+                    <option>Other</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <textarea id="message" rows="5" placeholder="Describe your issue in detail..." required></textarea>
+            </div>
+            <button type="submit" class="submit-btn">
+                <i class="fas fa-paper-plane"></i> Submit Complaint
+            </button>
+        </form>
+    </div>
+</div>
+
+<footer class="footer">
+    <div class="footer-content">
+        <div>
+            <h3>SkyWay Airlines</h3>
+            <p>Fly Smart, Fly Safe</p>
+        </div>
+        <div>
+            <h3>Quick Links</h3>
+            <p><a href="offers.html" style="color:white;">Offers</a></p>
+            <p><a href="support.html" style="color:white;">Support</a></p>
+        </div>
+        <div>
+            <h3>Connect With Us</h3>
+            <i class="fab fa-facebook" style="margin-right: 1rem; cursor: pointer;"></i>
+            <i class="fab fa-twitter" style="margin-right: 1rem; cursor: pointer;"></i>
+            <i class="fab fa-instagram" style="cursor: pointer;"></i>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2026 SkyWay Airlines. All rights reserved.</p>
+    </div>
+</footer>
+
+<div id="toast" class="toast"></div>
+
+<script>
+    function showToast(message, isError = false) {
+        const toast = document.getElementById('toast');
+        toast.textContent = message;
+        toast.style.background = isError ? '#ef4444' : '#10b981';
+        toast.style.display = 'block';
+        setTimeout(() => {
+            toast.style.display = 'none';
+        }, 3000);
+    }
+
+    // Form Submit Handler
+    document.getElementById('supportForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        const name = document.getElementById('name').value;
+        const issueType = document.getElementById('issueType').value;
+        
+        if (!name || !document.getElementById('email').value || !document.getElementById('mobile').value) {
+            showToast('❌ Please fill all required fields', true);
+            return;
+        }
+        
+        if (!issueType) {
+            showToast('❌ Please select an issue type', true);
+            return;
+        }
+        
+        showToast(`✅ Thank you ${name}! We'll respond within 24 hours.`);
+        
+        // Reset form
+        document.getElementById('supportForm').reset();
+    });
+
+    // Navbar Scroll Effect
+    window.addEventListener('scroll', () => {
+        const navbar = document.querySelector('.navbar');
+        if (window.scrollY > 100) {
+            navbar.style.padding = '0.5rem 0';
+        } else {
+            navbar.style.padding = '1rem 0';
+        }
+    });
+</script>
+</body>
+</html>

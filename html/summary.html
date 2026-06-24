@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Trip Summary | BlueSky Airlines</title>
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <!-- External CSS -->
+    <link rel="stylesheet" href="../css/summary.css">
+</head>
+<body>
+
+<!-- Navbar -->
+<div class="navbar">
+    <div class="nav-container">
+        <div class="logo"><i class="fas fa-plane-departure"></i> BlueSky</div>
+        <div class="nav-links">
+            <a href="#" id="homeNav">Home</a>
+            <a href="#" id="passengerDetailsNav">Passenger Details</a>
+        </div>
+        <div class="auth-buttons">
+            <button class="btn-login" id="loginBtn">Login</button>
+            <button class="btn-signup" id="signupBtn">Sign Up</button>
+        </div>
+    </div>
+</div>
+
+<!-- Progress Steps (Step 5 Active - Summary) -->
+<div class="progress-steps">
+    <div class="steps">
+        <a href="flights.html" class="step completed">
+            <div class="step-circle">✓</div>
+            <span>Flight</span>
+        </a>
+        <div class="step-line"></div>
+        <a href="passenger_details.html" class="step completed">
+            <div class="step-circle">✓</div>
+            <span>Passenger</span>
+        </a>
+        <div class="step-line"></div>
+        <a href="addons.html" class="step completed">
+            <div class="step-circle">✓</div>
+            <span>Add-ons</span>
+        </a>
+        <div class="step-line"></div>
+        <a href="seat_selection.html" class="step completed">
+            <div class="step-circle">✓</div>
+            <span>Seat</span>
+        </a>
+        <div class="step-line"></div>
+        <span class="step active">
+            <div class="step-circle">5</div>
+            <span>Summary</span>
+        </span>
+        <div class="step-line"></div>
+        <a href="payment.html" class="step">
+            <div class="step-circle">6</div>
+            <span>Payment</span>
+        </a>
+    </div>
+</div>
+
+<!-- Main Content -->
+<div class="container">
+    <!-- Summary Card -->
+    <div class="summary-card">
+        <div class="summary-header">
+            <i class="fas fa-clipboard-list"></i>
+            <h2>Trip Summary</h2>
+            <span class="summary-badge">REVIEW & CONFIRM</span>
+        </div>
+
+        <!-- Flight Details -->
+        <div class="section">
+            <div class="section-title">
+                <i class="fas fa-plane"></i>
+                <span>Flight Details</span>
+            </div>
+            <div class="details-grid" id="flightDetails"></div>
+        </div>
+
+        <!-- Passenger Details -->
+        <div class="section">
+            <div class="section-title">
+                <i class="fas fa-user-circle"></i>
+                <span>Passenger Details</span>
+            </div>
+            <div class="details-grid" id="passengerDetails"></div>
+        </div>
+
+        <!-- Seat Details -->
+        <div class="section">
+            <div class="section-title">
+                <i class="fas fa-chair"></i>
+                <span>Seat Details</span>
+            </div>
+            <div class="details-grid" id="seatDetails"></div>
+        </div>
+
+        <!-- Add-ons Details -->
+        <div class="section">
+            <div class="section-title">
+                <i class="fas fa-shopping-cart"></i>
+                <span>Add-ons</span>
+            </div>
+            <div class="details-grid" id="addonsDetails"></div>
+        </div>
+
+        <!-- Price Breakdown -->
+        <div class="section">
+            <div class="section-title">
+                <i class="fas fa-tag"></i>
+                <span>Price Breakdown</span>
+            </div>
+            <div class="price-breakdown" id="priceBreakdown"></div>
+        </div>
+
+        <!-- Terms & Conditions -->
+        <div class="terms">
+            <input type="checkbox" id="acceptTerms">
+            <label for="acceptTerms">
+                <span class="checkmark"></span>
+                I confirm that all details are correct and agree to the 
+                <a href="#" id="termsLink">Terms & Conditions</a>
+            </label>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+            <button class="btn-back" id="backBtn">
+                <i class="fas fa-arrow-left"></i> Back to Seat Selection
+            </button>
+            <button class="btn-proceed" id="proceedBtn" disabled>
+                Proceed to Payment <i class="fas fa-arrow-right"></i>
+            </button>
+        </div>
+    </div>
+</div>
+
+<script src="../js/summary.js"></script>
+</body>
+</html>

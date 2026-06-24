@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Confirmed | BlueSky Airlines</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- jsPDF & html2canvas for PDF Generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <link rel="stylesheet" href="../css/confirmation.css">
+</head>
+<body>
+
+<!-- Navbar -->
+<div class="navbar">
+    <div class="nav-container">
+        <div class="logo"><i class="fas fa-plane-departure"></i> BlueSky</div>
+        <div class="nav-links">
+            <a href="#" id="homeNav">Home</a>
+            <a href="#" id="passengerDetailsNav">Passenger Details</a>
+        </div>
+        <div class="auth-buttons">
+            <button class="btn-login" id="loginBtn">Login</button>
+            <button class="btn-signup" id="signupBtn">Sign Up</button>
+        </div>
+    </div>
+</div>
+
+<!-- Progress Steps (All Steps Completed) -->
+<div class="progress-steps">
+    <div class="steps">
+        <a href="flights.html" class="step completed">
+            <div class="step-circle">✓</div>
+            <span>Flight</span>
+        </a>
+        <div class="step-line"></div>
+        <a href="passenger_details.html" class="step completed">
+            <div class="step-circle">✓</div>
+            <span>Passenger</span>
+        </a>
+        <div class="step-line"></div>
+        <a href="addons.html" class="step completed">
+            <div class="step-circle">✓</div>
+            <span>Add-ons</span>
+        </a>
+        <div class="step-line"></div>
+        <a href="seat_selection.html" class="step completed">
+            <div class="step-circle">✓</div>
+            <span>Seat</span>
+        </a>
+        <div class="step-line"></div>
+        <a href="summary.html" class="step completed">
+            <div class="step-circle">✓</div>
+            <span>Summary</span>
+        </a>
+        <div class="step-line"></div>
+        <span class="step completed">
+            <div class="step-circle">✓</div>
+            <span>Payment</span>
+        </span>
+    </div>
+</div>
+
+<!-- Main Container -->
+<div class="container">
+    <!-- Success Animation -->
+    <div class="success-animation">
+        <div class="circle-check">
+            <i class="fas fa-check"></i>
+        </div>
+        <h1>Booking Confirmed!</h1>
+        <p>Your flight has been successfully booked</p>
+    </div>
+
+    <!-- Booking Details Card (This will be converted to PDF) -->
+    <div class="booking-card" id="ticketContent">
+        <!-- Airline Logo Watermark -->
+        <div class="ticket-watermark">
+            <i class="fas fa-plane"></i>
+            <span>BLUESKY</span>
+        </div>
+
+        <div class="booking-header">
+            <div class="pnr-section">
+                <span class="pnr-label">PNR Number</span>
+                <span class="pnr-value" id="pnrNumber">BLU6A4B7C9</span>
+            </div>
+            <div class="booking-status">
+                <i class="fas fa-check-circle"></i>
+                <span>CONFIRMED</span>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Flight Details -->
+        <div class="info-section">
+            <div class="section-title">
+                <i class="fas fa-plane"></i>
+                <span>Flight Details</span>
+            </div>
+            <div class="info-grid" id="flightDetails"></div>
+        </div>
+
+        <!-- Passenger Details -->
+        <div class="info-section">
+            <div class="section-title">
+                <i class="fas fa-user-circle"></i>
+                <span>Passenger Details</span>
+            </div>
+            <div class="info-grid" id="passengerDetails"></div>
+        </div>
+
+        <!-- Seat Details -->
+        <div class="info-section">
+            <div class="section-title">
+                <i class="fas fa-chair"></i>
+                <span>Seat Details</span>
+            </div>
+            <div class="info-grid" id="seatDetails"></div>
+        </div>
+
+        <!-- Payment Details -->
+        <div class="info-section">
+            <div class="section-title">
+                <i class="fas fa-credit-card"></i>
+                <span>Payment Details</span>
+            </div>
+            <div class="info-grid" id="paymentDetails"></div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Fare Summary -->
+        <div class="fare-summary">
+            <div class="fare-row">
+                <span>Base Fare</span>
+                <span id="baseFare">₹0</span>
+            </div>
+            <div class="fare-row">
+                <span>Seat Fee</span>
+                <span id="seatFee">₹0</span>
+            </div>
+            <div class="fare-row">
+                <span>Taxes & Fees (5%)</span>
+                <span id="taxes">₹0</span>
+            </div>
+            <div class="fare-row total">
+                <span>Total Amount</span>
+                <span id="totalAmount">₹0</span>
+            </div>
+        </div>
+
+        <!-- QR Code & Boarding Info -->
+        <div class="boarding-section">
+            <div class="qr-container">
+                <div class="qr-code" id="qrCode">
+                    <i class="fas fa-qrcode"></i>
+                    <span>Scan for<br>Boarding</span>
+                </div>
+            </div>
+            <div class="boarding-info">
+                <div class="boarding-item">
+                    <i class="fas fa-clock"></i>
+                    <div>
+                        <strong>Boarding Time</strong>
+                        <span>07:45 AM (60 mins before departure)</span>
+                    </div>
+                </div>
+                <div class="boarding-item">
+                    <i class="fas fa-gate"></i>
+                    <div>
+                        <strong>Gate Number</strong>
+                        <span>Gate B-12</span>
+                    </div>
+                </div>
+                <div class="boarding-item">
+                    <i class="fas fa-luggage-cart"></i>
+                    <div>
+                        <strong>Baggage Drop</strong>
+                        <span>Counter 23-28</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="action-buttons">
+        <button class="btn-download" id="downloadBtn">
+            <i class="fas fa-download"></i> Download PDF Ticket
+        </button>
+        <button class="btn-print" id="printBtn">
+            <i class="fas fa-print"></i> Print Ticket
+        </button>
+        <button class="btn-whatsapp" id="whatsappBtn">
+            <i class="fab fa-whatsapp"></i> Share on WhatsApp
+        </button>
+        <button class="btn-home" id="homeBtn">
+            <i class="fas fa-home"></i> Back to Home
+        </button>
+    </div>
+
+    <!-- Important Information -->
+    <div class="info-card">
+        <h3><i class="fas fa-info-circle"></i> Important Information</h3>
+        <ul>
+            <li><i class="fas fa-id-card"></i> Carry a valid government-issued ID proof for check-in</li>
+            <li><i class="fas fa-clock"></i> Web check-in opens 48 hours before departure</li>
+            <li><i class="fas fa-suitcase"></i> Cabin baggage: 7kg | Check-in baggage: 15kg</li>
+            <li><i class="fas fa-clock"></i> Report at the airport at least 2 hours before departure</li>
+            <li><i class="fas fa-mobile-alt"></i> Keep this ticket (digital or print) for boarding</li>
+            <li><i class="fas fa-undo-alt"></i> Cancellation charges apply as per fare rules</li>
+        </ul>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer-note">
+        <p>© 2026 BlueSky Airlines | All Rights Reserved | For assistance call: +91 9876543210</p>
+    </div>
+</div>
+
+<script src="../js/confirmation.js"></script>
+</body>
+</html>

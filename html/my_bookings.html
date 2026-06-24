@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Bookings | BlueSky Airlines</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/my_bookings.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">
+                <i class="fas fa-plane"></i>
+                <span>BlueSky Airlines</span>
+            </div>
+            <div class="flight-info">
+                <div class="route">
+                    <span>My Bookings</span>
+                </div>
+                <div class="date">Manage your upcoming and past trips</div>
+            </div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="upcoming">Upcoming Trips</button>
+            <button class="tab-btn" data-tab="past">Past Trips</button>
+            <button class="tab-btn" data-tab="cancelled">Cancelled</button>
+        </div>
+
+        <!-- Bookings List -->
+        <div class="bookings-container" id="bookingsContainer">
+            <div class="empty-state" id="emptyState">
+                <i class="fas fa-plane-departure"></i>
+                <h3>No bookings found</h3>
+                <p>You haven't made any bookings yet.</p>
+                <button class="btn-book-now" onclick="window.location.href='flights.html'">
+                    Book a Flight <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+            <div id="bookingsList"></div>
+        </div>
+    </div>
+
+    <!-- Cancel Modal -->
+    <div class="modal" id="cancelModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-exclamation-triangle"></i> Cancel Booking</h3>
+                <button class="modal-close" id="closeModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to cancel this booking?</p>
+                <p class="refund-info">Refund amount: <span id="refundAmount">₹0</span></p>
+                <p class="warning">This action cannot be undone.</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" id="cancelModalBtn">No, Go Back</button>
+                <button class="btn-danger" id="confirmCancelBtn">Yes, Cancel Booking</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/my_bookings.js"></script>
+</body>
+</html>

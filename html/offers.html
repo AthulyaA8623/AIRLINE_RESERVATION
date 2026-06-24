@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offers | SkyWay Airlines</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1E3A5F;
+            --secondary: #F05A28;
+            --gray: #64748b;
+            --light-gray: #f8fafc;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Poppins', sans-serif;
+            background: var(--light-gray);
+        }
+
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: var(--white);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .nav-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo i {
+            font-size: 1.8rem;
+            color: var(--secondary);
+        }
+
+        .logo h1 {
+            font-size: 1.6rem;
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--gray);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--secondary);
+        }
+
+        .back-home {
+            background: var(--secondary);
+            color: white;
+            padding: 0.5rem 1.2rem;
+            border-radius: 8px;
+            text-decoration: none;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, var(--primary), #0F2B44);
+            color: white;
+            padding: 120px 2rem 4rem;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Offers Section */
+        .offers-section {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+
+        .offer-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+        }
+
+        .offer-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .offer-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(240, 90, 40, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .offer-icon i {
+            font-size: 2.5rem;
+            color: var(--secondary);
+        }
+
+        .offer-details {
+            flex: 1;
+        }
+
+        .offer-details h3 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .offer-tag {
+            display: inline-block;
+            background: var(--secondary);
+            color: white;
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .offer-desc {
+            color: var(--gray);
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .offer-code {
+            background: var(--light-gray);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            display: inline-block;
+            font-family: monospace;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: var(--secondary);
+        }
+
+        .offer-valid {
+            font-size: 0.8rem;
+            color: var(--gray);
+            margin-top: 0.5rem;
+        }
+
+        .copy-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.3rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 1rem;
+        }
+
+        .footer {
+            background: var(--primary);
+            color: white;
+            padding: 3rem 2rem 1rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: #10b981;
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            display: none;
+            z-index: 1100;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .offer-card { flex-direction: column; text-align: center; }
+            .offer-icon { margin: 0 auto; }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="logo">
+            <i class="fas fa-plane-departure"></i>
+            <h1>SkyWay</h1>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="offers.html" class="active">Offers</a>
+            <a href="support.html">Support</a>
+            <a href="index.html" class="back-home"><i class="fas fa-home"></i> Back</a>
+        </div>
+    </div>
+</nav>
+
+<div class="page-header">
+    <h1>🎉 Exclusive Offers</h1>
+    <p>Amazing deals and discounts just for you</p>
+</div>
+
+<div class="offers-section">
+    
+    <!-- Offer 1 -->
+    <div class="offer-card">
+        <div class="offer-icon">
+            <i class="fas fa-gift"></i>
+        </div>
+        <div class="offer-details">
+            <span class="offer-tag">🔥 HOT DEAL</span>
+            <h3>First Booking Discount</h3>
+            <p class="offer-desc">Get 20% off on your very first flight booking with SkyWay Airlines. Applicable on all domestic flights.</p>
+            <div>
+                <span class="offer-code">SKYWAY20</span>
+                <button class="copy-btn" data-code="SKYWAY20">Copy Code</button>
+            </div>
+            <p class="offer-valid">Valid until: 31 Dec 2026 | Min booking value: ₹2000</p>
+        </div>
+    </div>
+
+    <!-- Offer 2 -->
+    <div class="offer-card">
+        <div class="offer-icon">
+            <i class="fas fa-users"></i>
+        </div>
+        <div class="offer-details">
+            <span class="offer-tag">👨‍👩‍👧‍👦 FAMILY OFFER</span>
+            <h3>Family Package - Book 3 Get 1 Free</h3>
+            <p class="offer-desc">Book 3 tickets and get 1 ticket absolutely free! Perfect for family vacations.</p>
+            <div>
+                <span class="offer-code">FAMILY4</span>
+                <button class="copy-btn" data-code="FAMILY4">Copy Code</button>
+            </div>
+            <p class="offer-valid">Valid until: 30 Nov 2026 | T&C apply</p>
+        </div>
+    </div>
+
+    <!-- Offer 3 -->
+    <div class="offer-card">
+        <div class="offer-icon">
+            <i class="fas fa-calendar-alt"></i>
+        </div>
+        <div class="offer-details">
+            <span class="offer-tag">📅 WEEKEND SALE</span>
+            <h3>Weekend Special - Flat ₹500 Off</h3>
+            <p class="offer-desc">Book flights every Saturday & Sunday and get flat ₹500 discount on every booking.</p>
+            <div>
+                <span class="offer-code">WEEKEND500</span>
+                <button class="copy-btn" data-code="WEEKEND500">Copy Code</button>
+            </div>
+            <p class="offer-valid">Valid only on Saturday & Sunday</p>
+        </div>
+    </div>
+
+    <!-- Offer 4 -->
+    <div class="offer-card">
+        <div class="offer-icon">
+            <i class="fas fa-credit-card"></i>
+        </div>
+        <div class="offer-details">
+            <span class="offer-tag">💳 BANK OFFER</span>
+            <h3>Axis Bank Credit Card - 15% Instant Discount</h3>
+            <p class="offer-desc">Get 15% instant discount on all bookings using Axis Bank Credit Cards. Maximum discount ₹1500.</p>
+            <div>
+                <span class="offer-code">AXIS15</span>
+                <button class="copy-btn" data-code="AXIS15">Copy Code</button>
+            </div>
+            <p class="offer-valid">Valid until: 31 Oct 2026</p>
+        </div>
+    </div>
+
+    <!-- Offer 5 -->
+    <div class="offer-card">
+        <div class="offer-icon">
+            <i class="fas fa-star"></i>
+        </div>
+        <div class="offer-details">
+            <span class="offer-tag">⭐ STUDENT OFFER</span>
+            <h3>Student Special - 25% Off</h3>
+            <p class="offer-desc">Exclusive 25% discount for students with valid ID card. Show ID at check-in.</p>
+            <div>
+                <span class="offer-code">STUDENT25</span>
+                <button class="copy-btn" data-code="STUDENT25">Copy Code</button>
+            </div>
+            <p class="offer-valid">Valid throughout the year | Valid ID required</p>
+        </div>
+    </div>
+
+    <!-- Offer 6 -->
+    <div class="offer-card">
+        <div class="offer-icon">
+            <i class="fas fa-chart-line"></i>
+        </div>
+        <div class="offer-details">
+            <span class="offer-tag">🔄 RETURN OFFER</span>
+            <h3>Round Trip Discount - Save 10%</h3>
+            <p class="offer-desc">Book round trip flights and save 10% on total fare. Automatic discount applied.</p>
+            <div>
+                <span class="offer-code">ROUND10</span>
+                <button class="copy-btn" data-code="ROUND10">Copy Code</button>
+            </div>
+            <p class="offer-valid">Valid on all round trip bookings</p>
+        </div>
+    </div>
+</div>
+
+<footer class="footer">
+    <div class="footer-content">
+        <div><h3>SkyWay Airlines</h3><p>Fly Smart, Fly Safe</p></div>
+        <div><h3>Quick Links</h3><p><a href="offers.html" style="color:white;">Offers</a></p></div>
+        <div><h3>Connect</h3><i class="fab fa-facebook"></i> <i class="fab fa-twitter"></i> <i class="fab fa-instagram"></i></div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 SkyWay Airlines. All rights reserved.</p></div>
+</footer>
+
+<div id="toast" class="toast"></div>
+
+<script>
+    function showToast(message) {
+        const toast = document.getElementById('toast');
+        toast.textContent = message;
+        toast.style.display = 'block';
+        setTimeout(() => { toast.style.display = 'none'; }, 2000);
+    }
+
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const code = btn.getAttribute('data-code');
+            navigator.clipboard.writeText(code);
+            showToast(`✅ Code ${code} copied! Apply at checkout.`);
+        });
+    });
+
+    window.addEventListener('scroll', () => {
+        const navbar = document.querySelector('.navbar');
+        if (window.scrollY > 100) navbar.style.padding = '0.5rem 0';
+        else navbar.style.padding = '1rem 0';
+    });
+</script>
+</body>
+</html>

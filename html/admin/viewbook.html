@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View All Bookings - Airline Admin</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="../../css/viewbook.css">
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo"><h2><i class="fas fa-plane"></i> Airline Admin</h2></div>
+        <div class="nav-links">
+            <a href="Dashboard.html"><i class="fas fa-chart-line"></i> Dashboard</a>
+            <a href="Addflight.html"><i class="fas fa-plus-circle"></i> Add Flight</a>
+            <a href="Updateflight.html"><i class="fas fa-pen-alt"></i> Update Flight</a>
+            <a href="Deleteflight.html"><i class="fas fa-trash-alt"></i> Delete Flight</a>
+            <a href="viewflight.html"><i class="fas fa-list-ul"></i> View Flights</a>
+            <a href="viewbook.html" class="active"><i class="fas fa-ticket-alt"></i> View Bookings</a>
+            <a href="seat.html"><i class="fas fa-chair"></i> Seat Mgmt</a>
+            <a href="logout.html"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="page-header">
+            <h1><i class="fas fa-receipt"></i> All Bookings</h1>
+            <p>View and manage all passenger bookings</p>
+        </div>
+
+        <!-- Search and Filter Section -->
+        <div class="search-section">
+            <div class="search-box">
+                <div class="search-input-wrapper">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Search by PNR, Flight Number, Passenger Name, or Route...">
+                </div>
+                <div class="filter-group">
+                    <select id="statusFilter" class="filter-select">
+                        <option value="all">All Status</option>
+                        <option value="confirmed">Confirmed</option>
+                        <option value="cancelled">Cancelled</option>
+                        <option value="checked-in">Checked In</option>
+                    </select>
+                    <select id="dateFilter" class="filter-select">
+                        <option value="all">All Dates</option>
+                        <option value="today">Today</option>
+                        <option value="tomorrow">Tomorrow</option>
+                        <option value="week">This Week</option>
+                        <option value="month">This Month</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats Summary -->
+        <div class="stats-summary" id="statsSummary">
+            <div class="stat-card-mini">
+                <i class="fas fa-ticket-alt"></i>
+                <div class="stat-info">
+                    <span class="stat-label">Total Bookings</span>
+                    <span class="stat-number" id="totalBookings">0</span>
+                </div>
+            </div>
+            <div class="stat-card-mini">
+                <i class="fas fa-users"></i>
+                <div class="stat-info">
+                    <span class="stat-label">Total Passengers</span>
+                    <span class="stat-number" id="totalPassengers">0</span>
+                </div>
+            </div>
+            <div class="stat-card-mini">
+                <i class="fas fa-rupee-sign"></i>
+                <div class="stat-info">
+                    <span class="stat-label">Total Revenue</span>
+                    <span class="stat-number" id="totalRevenue">₹0</span>
+                </div>
+            </div>
+            <div class="stat-card-mini">
+                <i class="fas fa-check-circle"></i>
+                <div class="stat-info">
+                    <span class="stat-label">Confirmed</span>
+                    <span class="stat-number" id="confirmedCount">0</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bookings Table -->
+        <div class="table-wrapper">
+            <div class="table-header">
+                <h3><i class="fas fa-list"></i> Booking Records</h3>
+                <div class="table-actions">
+                    <button id="exportBtn" class="action-icon-btn" title="Export to CSV">
+                        <i class="fas fa-download"></i>
+                    </button>
+                    <button id="refreshBtn" class="action-icon-btn" title="Refresh">
+                        <i class="fas fa-sync-alt"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table id="bookingsTable">
+                    <thead>
+                        <tr>
+                            <th><i class="fas fa-barcode"></i> PNR</th>
+                            <th><i class="fas fa-plane"></i> Flight</th>
+                            <th><i class="fas fa-route"></i> Route</th>
+                            <th><i class="fas fa-calendar"></i> Date</th>
+                            <th><i class="fas fa-users"></i> Passengers</th>
+                            <th><i class="fas fa-rupee-sign"></i> Total</th>
+                            <th><i class="fas fa-info-circle"></i> Status</th>
+                            <th><i class="fas fa-cogs"></i> Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                        <tr>
+                            <td colspan="8" class="loading-cell">
+                                <div class="loading-spinner"></div>
+                                Loading bookings...
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Booking Details Modal -->
+    <div id="bookingModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-info-circle"></i> Booking Details</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <!-- Cancel Confirmation Modal -->
+    <div id="cancelModal" class="modal">
+        <div class="modal-content modal-small">
+            <div class="modal-header">
+                <h3><i class="fas fa-exclamation-triangle"></i> Cancel Booking</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to cancel this booking?</p>
+                <p class="warning-text">This action cannot be undone!</p>
+            </div>
+            <div class="modal-buttons">
+                <button class="modal-btn modal-btn-secondary" id="cancelNoBtn">No, Keep</button>
+                <button class="modal-btn modal-btn-danger" id="cancelYesBtn">Yes, Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../js/viewbook.js"></script>
+</body>
+</html>

@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | SkyWay Airlines</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1E3A5F;
+            --primary-dark: #0F2B44;
+            --secondary: #F05A28;
+            --accent: #10b981;
+            --dark: #1e293b;
+            --gray: #64748b;
+            --light-gray: #f8fafc;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Poppins', sans-serif;
+            background: var(--white);
+            color: var(--dark);
+        }
+
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: var(--white);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .nav-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo i {
+            font-size: 1.8rem;
+            color: var(--secondary);
+        }
+
+        .logo h1 {
+            font-size: 1.6rem;
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--gray);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary);
+        }
+
+        .back-home {
+            background: var(--secondary);
+            color: white;
+            padding: 0.5rem 1.2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .back-home:hover {
+            background: #d94a1a;
+            transform: translateY(-2px);
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 120px 2rem 4rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 300px;
+            height: 300px;
+            background: rgba(240, 90, 40, 0.1);
+            border-radius: 50%;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 0.6s ease;
+        }
+
+        .page-header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            animation: fadeInUp 0.6s ease 0.2s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Content Sections */
+        .content-section {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .about-text p {
+            color: var(--gray);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .about-image img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        /* Stats Section */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin: 4rem 0;
+            text-align: center;
+        }
+
+        .stat-card {
+            padding: 2rem;
+            background: var(--light-gray);
+            border-radius: 20px;
+            transition: all 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .stat-card i {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .stat-card h3 {
+            font-size: 2rem;
+            color: var(--primary);
+        }
+
+        /* Mission Vision */
+        .mission-vision {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+
+        .mv-card {
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border-radius: 20px;
+            text-align: center;
+        }
+
+        .mv-card i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .mv-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Values */
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .value-card {
+            text-align: center;
+            padding: 2rem;
+            background: var(--light-gray);
+            border-radius: 20px;
+            transition: all 0.3s;
+        }
+
+        .value-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .value-card i {
+            font-size: 2rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--primary);
+            color: white;
+            padding: 3rem 2rem 1rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        @media (max-width: 768px) {
+            .about-grid, .mission-vision, .values-grid, .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            .nav-links {
+                display: none;
+            }
+            .page-header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="logo">
+            <i class="fas fa-plane-departure"></i>
+            <h1>SkyWay</h1>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="#">Flights</a>
+            <a href="#">Offers</a>
+            <a href="about.html" style="color: var(--secondary);">About</a>
+            <a href="contact.html">Contact</a>
+            <a href="index.html" class="back-home"><i class="fas fa-home"></i> Back to Home</a>
+        </div>
+    </div>
+</nav>
+
+<div class="page-header">
+    <h1>About SkyWay Airlines</h1>
+    <p>India's most loved airline, connecting dreams since 2010</p>
+</div>
+
+<div class="content-section">
+    <div class="about-grid">
+        <div class="about-text">
+            <h2>Our Story</h2>
+            <p>Founded in 2010, SkyWay Airlines has grown to become one of India's most trusted and loved airlines. With a fleet of over 100 aircraft and 1000+ daily flights, we connect 100+ destinations across India and internationally.</p>
+            <p>Our commitment to punctuality, affordability, and exceptional service has earned us the loyalty of millions of passengers. We believe in making air travel accessible to everyone without compromising on quality and safety.</p>
+        </div>
+        <div class="about-image">
+            <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=600&h=400&fit=crop" alt="SkyWay Airplane">
+        </div>
+    </div>
+
+    <div class="stats-grid">
+        <div class="stat-card">
+            <i class="fas fa-plane"></i>
+            <h3>100+</h3>
+            <p>Aircraft Fleet</p>
+        </div>
+        <div class="stat-card">
+            <i class="fas fa-globe-asia"></i>
+            <h3>100+</h3>
+            <p>Destinations</p>
+        </div>
+        <div class="stat-card">
+            <i class="fas fa-users"></i>
+            <h3>10M+</h3>
+            <p>Happy Customers</p>
+        </div>
+        <div class="stat-card">
+            <i class="fas fa-calendar-alt"></i>
+            <h3>15+</h3>
+            <p>Years of Excellence</p>
+        </div>
+    </div>
+
+    <div class="mission-vision">
+        <div class="mv-card">
+            <i class="fas fa-bullseye"></i>
+            <h3>Our Mission</h3>
+            <p>To make air travel affordable, reliable, and enjoyable for every Indian, while maintaining the highest safety standards.</p>
+        </div>
+        <div class="mv-card">
+            <i class="fas fa-eye"></i>
+            <h3>Our Vision</h3>
+            <p>To become India's most preferred airline, connecting every corner of the country with world-class service.</p>
+        </div>
+    </div>
+
+    <h2 style="text-align: center; margin: 3rem 0 1rem;">Our Core Values</h2>
+    <div class="values-grid">
+        <div class="value-card">
+            <i class="fas fa-shield-alt"></i>
+            <h3>Safety First</h3>
+            <p>Uncompromising commitment to passenger and crew safety</p>
+        </div>
+        <div class="value-card">
+            <i class="fas fa-clock"></i>
+            <h3>On-Time Performance</h3>
+            <p>Industry-leading punctuality record</p>
+        </div>
+        <div class="value-card">
+            <i class="fas fa-smile"></i>
+            <h3>Customer First</h3>
+            <p>Every passenger is treated like family</p>
+        </div>
+    </div>
+</div>
+
+<footer class="footer">
+    <div class="footer-content">
+        <div>
+            <h3>SkyWay Airlines</h3>
+            <p>Fly Smart, Fly Safe</p>
+        </div>
+        <div>
+            <h3>Quick Links</h3>
+            <p><a href="about.html" style="color: white; text-decoration: none;">About Us</a></p>
+            <p><a href="contact.html" style="color: white; text-decoration: none;">Contact</a></p>
+        </div>
+        <div>
+            <h3>Connect With Us</h3>
+            <i class="fab fa-facebook" style="margin-right: 1rem;"></i>
+            <i class="fab fa-twitter" style="margin-right: 1rem;"></i>
+            <i class="fab fa-instagram"></i>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2026 SkyWay Airlines. All rights reserved.</p>
+    </div>
+</footer>
+
+<script>
+    // Add scroll animation
+    window.addEventListener('scroll', () => {
+        const navbar = document.querySelector('.navbar');
+        if (window.scrollY > 100) {
+            navbar.style.padding = '0.5rem 0';
+        } else {
+            navbar.style.padding = '1rem 0';
+        }
+    });
+</script>
+</body>
+</html>

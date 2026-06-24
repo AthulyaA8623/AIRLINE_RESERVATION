@@ -1,0 +1,386 @@
+// Wait for DOM to be fully loaded
+document.addEventListener('DOMContentLoaded', function() {
+    // DOM Elements
+    const flightListDiv = document.getElementById('flightList');
+    
+    // State variables
+    let allFlights = [];
+    let currentFilter = 'all';
+    let searchTerm = '';
+    let currentEditingFlight = null;
+    
+    // Message container
+    let messageDiv = document.getElementById('message');
+    if (!messageDiv) {
+        messageDiv = document.createElement('div');
+        messageDiv.id = 'message';
+        document.body.appendChild(messageDiv);
+    }
+    
+    // Helper: Show message
+    let messageTimeout = null;
+    function showMessage(text, type = 'success') {
+        if (messageTimeout) clearTimeout(messageTimeout);
+        messageDiv.textContent = text;
+        messageDiv.className = `${type}-message`;
+        messageTimeout = setTimeout(() => {
+            messageDiv.textContent = '';
+            messageDiv.className = '';
+        }, 3000);
+    }
+    
+    // Get all flights from localStorage
+    function getAllFlights() {
+        const stored = localStorage.getItem("airline_flights");
+        if (!stored) return [];
+        try {
+            return JSON.parse(stored);
+        } catch (e) {
+            return [];
+        }
+    }
+    
+    // Save flights to localStorage
+    function saveFlightsToLocalStorage(flights) {
+        localStorage.setItem("airline_flights", JSON.stringify(flights));
+        window.dispatchEvent(new StorageEvent('storage', {
+            key: 'airline_flights',
+            newValue: JSON.stringify(flights)
+        }));
+    }
+    
+    // Update flight
+    function updateFlight(flightId, updatedData) {
+        const flightIndex = allFlights.findIndex(f => f.id === flightId);
+        if (flightIndex === -1) {
+            showMessage('Flight not found!', 'error');
+            return false;
+        }
+        
+        // Check if flight number already exists (excluding current flight)
+        const duplicateExists = allFlights.some(f => 
+            f.id !== flightId && 
+            f.flightNo.toLowerCase() === updatedData.flightNo.toLowerCase() &&
+            f.date === updatedData.date &&
+            f.fromCity.toLowerCase() === updatedData.fromCity.toLowerCase()
+        );
+        
+        if (duplicateExists) {
+            showMessage('A flight with this number, date, and route already exists!', 'error');
+            return false;
+        }
+        
+        // Update flight
+        allFlights[flightIndex] = {
+            ...allFlights[flightIndex],
+            ...updatedData,
+            updatedAt: new Date().toISOString()
+        };
+        
+        saveFlightsToLocalStorage(allFlights);
+        showMessage(`✅ Flight ${updatedData.flightNo} updated successfully!`, 'success');
+        loadFlights();
+        return true;
+    }
+    
+    // Check if flight is upcoming
+    function isUpcomingFlight(flightDate) {
+        return new Date(flightDate) >= new Date();
+    }
+    
+    // Format date
+    function formatDate(dateString) {
+        const options = { year: 'numeric', month: 'short', day: 'numeric' };
+        return new Date(dateString).toLocaleDateString('en-IN', options);
+    }
+    
+    // Filter flights
+    function getFilteredFlights() {
+        let filtered = [...allFlights];
+        
+        if (searchTerm) {
+            const term = searchTerm.toLowerCase();
+            filtered = filtered.filter(flight => 
+                flight.flightNo.toLowerCase().includes(term) ||
+                flight.airline.toLowerCase().includes(term) ||
+                flight.fromCity.toLowerCase().includes(term) ||
+                flight.toCity.toLowerCase().includes(term)
+            );
+        }
+        
+        if (currentFilter === 'upcoming') {
+            filtered = filtered.filter(flight => isUpcomingFlight(flight.date));
+        } else if (currentFilter === 'completed') {
+            filtered = filtered.filter(flight => !isUpcomingFlight(flight.date));
+        }
+        
+        filtered.sort((a, b) => new Date(b.date) - new Date(a.date));
+        
+        return filtered;
+    }
+    
+    // Show edit modal
+    function showEditModal(flight) {
+        // Remove existing modal
+        const existingModal = document.querySelector('.modal');
+        if (existingModal) {
+            existingModal.remove();
+        }
+        
+        currentEditingFlight = flight;
+        
+        const modal = document.createElement('div');
+        modal.className = 'modal';
+        modal.innerHTML = `
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3><i class="fas fa-edit"></i> Edit Flight - ${flight.flightNo}</h3>
+                    <button class="close-modal">&times;</button>
+                </div>
+                <form id="editFlightForm">
+                    <div class="form-grid">
+                        <div class="input-group">
+                            <label><i class="fas fa-hashtag"></i> Flight Number *</label>
+                            <input type="text" id="editFlightNo" value="${flight.flightNo}" required>
+                        </div>
+                        <div class="input-group">
+                            <label><i class="fas fa-building"></i> Airline *</label>
+                            <input type="text" id="editAirline" value="${flight.airline}" required>
+                        </div>
+                        <div class="input-group">
+                            <label><i class="fas fa-map-marker-alt"></i> From *</label>
+                            <input type="text" id="editFromCity" value="${flight.fromCity}" required>
+                        </div>
+                        <div class="input-group">
+                            <label><i class="fas fa-location-dot"></i> To *</label>
+                            <input type="text" id="editToCity" value="${flight.toCity}" required>
+                        </div>
+                        <div class="input-group">
+                            <label><i class="fas fa-calendar-alt"></i> Date *</label>
+                            <input type="date" id="editDate" value="${flight.date}" required>
+                        </div>
+                        <div class="input-group">
+                            <label><i class="fas fa-clock"></i> Time *</label>
+                            <input type="time" id="editTime" value="${flight.time}" required>
+                        </div>
+                        <div class="input-group">
+                            <label><i class="fas fa-rupee-sign"></i> Price (₹) *</label>
+                            <input type="number" id="editPrice" value="${flight.price}" step="1" min="0" required>
+                        </div>
+                        <div class="input-group">
+                            <label><i class="fas fa-chair"></i> Available Seats *</label>
+                            <input type="number" id="editSeats" value="${flight.seats}" min="1" max="500" required>
+                        </div>
+                    </div>
+                    <div class="modal-buttons">
+                        <button type="button" class="modal-btn modal-btn-secondary" id="cancelEditBtn">Cancel</button>
+                        <button type="submit" class="modal-btn modal-btn-primary">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+        `;
+        
+        document.body.appendChild(modal);
+        modal.classList.add('show');
+        
+        // Close modal handlers
+        const closeBtn = modal.querySelector('.close-modal');
+        const cancelBtn = document.getElementById('cancelEditBtn');
+        
+        const closeModal = () => {
+            modal.classList.remove('show');
+            setTimeout(() => modal.remove(), 300);
+            currentEditingFlight = null;
+        };
+        
+        closeBtn.addEventListener('click', closeModal);
+        cancelBtn.addEventListener('click', closeModal);
+        
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
+        
+        // Handle form submission
+        const editForm = document.getElementById('editFlightForm');
+        editForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const updatedData = {
+                flightNo: document.getElementById('editFlightNo').value.trim().toUpperCase(),
+                airline: document.getElementById('editAirline').value.trim(),
+                fromCity: document.getElementById('editFromCity').value.trim(),
+                toCity: document.getElementById('editToCity').value.trim(),
+                date: document.getElementById('editDate').value,
+                time: document.getElementById('editTime').value,
+                price: parseFloat(document.getElementById('editPrice').value),
+                seats: parseInt(document.getElementById('editSeats').value, 10)
+            };
+            
+            // Validate
+            if (!updatedData.flightNo || !updatedData.airline || !updatedData.fromCity || !updatedData.toCity) {
+                showMessage('Please fill all required fields!', 'error');
+                return;
+            }
+            
+            if (updatedData.fromCity.toLowerCase() === updatedData.toCity.toLowerCase()) {
+                showMessage('Origin and destination cannot be the same!', 'error');
+                return;
+            }
+            
+            if (isNaN(updatedData.price) || updatedData.price <= 0) {
+                showMessage('Please enter a valid price!', 'error');
+                return;
+            }
+            
+            if (isNaN(updatedData.seats) || updatedData.seats < 1 || updatedData.seats > 500) {
+                showMessage('Seats must be between 1 and 500!', 'error');
+                return;
+            }
+            
+            updateFlight(flight.id, updatedData);
+            closeModal();
+        });
+    }
+    
+    // Render flight list
+    function renderFlightList() {
+        const filteredFlights = getFilteredFlights();
+        
+        if (filteredFlights.length === 0) {
+            flightListDiv.innerHTML = `
+                <div class="empty-state">
+                    <i class="fas fa-plane-slash"></i>
+                    <h3>No Flights Found</h3>
+                    <p>${allFlights.length === 0 ? 'No flights available. Add some flights first!' : 'No flights match your search criteria.'}</p>
+                    ${allFlights.length === 0 ? '<button onclick="window.location.href=\'Addflight.html\'"><i class="fas fa-plus"></i> Add Flight</button>' : ''}
+                </div>
+            `;
+            return;
+        }
+        
+        const flightsHTML = `
+            <div class="search-section">
+                <div class="search-box">
+                    <div class="search-input-wrapper">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="searchInput" placeholder="Search by flight number, airline, or route..." value="${searchTerm}">
+                    </div>
+                    <div class="filter-buttons">
+                        <button class="filter-btn ${currentFilter === 'all' ? 'active' : ''}" data-filter="all">All Flights</button>
+                        <button class="filter-btn ${currentFilter === 'upcoming' ? 'active' : ''}" data-filter="upcoming">Upcoming</button>
+                        <button class="filter-btn ${currentFilter === 'completed' ? 'active' : ''}" data-filter="completed">Completed</button>
+                    </div>
+                </div>
+            </div>
+            <div class="flight-list-header">
+                <h3><i class="fas fa-list"></i> Available Flights</h3>
+                <span class="flight-count">${filteredFlights.length} flight${filteredFlights.length !== 1 ? 's' : ''}</span>
+            </div>
+            <div class="flight-grid" id="flightGrid"></div>
+        `;
+        
+        flightListDiv.innerHTML = flightsHTML;
+        
+        const flightGrid = document.getElementById('flightGrid');
+        let cardsHTML = '';
+        
+        filteredFlights.forEach(flight => {
+            const isUpcoming = isUpcomingFlight(flight.date);
+            
+            cardsHTML += `
+                <div class="flight-card" data-flight-id="${flight.id}">
+                    <div class="flight-header">
+                        <div>
+                            <div class="flight-number">
+                                <i class="fas fa-plane"></i> ${flight.flightNo}
+                            </div>
+                            <div class="flight-airline">
+                                <i class="fas fa-building"></i> ${flight.airline}
+                            </div>
+                        </div>
+                        <span class="flight-status ${isUpcoming ? 'status-upcoming' : 'status-completed'}">
+                            <i class="fas ${isUpcoming ? 'fa-clock' : 'fa-check-circle'}"></i>
+                            ${isUpcoming ? 'Upcoming' : 'Completed'}
+                        </span>
+                    </div>
+                    
+                    <div class="flight-route">
+                        <span class="route-city">${flight.fromCity}</span>
+                        <i class="fas fa-plane route-arrow"></i>
+                        <span class="route-city">${flight.toCity}</span>
+                    </div>
+                    
+                    <div class="flight-details">
+                        <div class="detail-item">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span><strong>Date:</strong> ${formatDate(flight.date)}</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-clock"></i>
+                            <span><strong>Time:</strong> ${flight.time}</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-chair"></i>
+                            <span><strong>Seats:</strong> ${flight.seats}</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-rupee-sign"></i>
+                            <span><strong>Price:</strong> ₹${flight.price.toLocaleString('en-IN')}</span>
+                        </div>
+                    </div>
+                    
+                    <button class="update-btn ${!isUpcoming ? 'disabled' : ''}" data-flight-id="${flight.id}" ${!isUpcoming ? 'disabled' : ''}>
+                        <i class="fas fa-edit"></i> 
+                        ${!isUpcoming ? 'Cannot Edit (Flight Completed)' : 'Edit Flight'}
+                    </button>
+                </div>
+            `;
+        });
+        
+        flightGrid.innerHTML = cardsHTML;
+        
+        // Attach edit button events
+        document.querySelectorAll('.update-btn:not(.disabled)').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const flightId = btn.getAttribute('data-flight-id');
+                const flight = filteredFlights.find(f => f.id === flightId);
+                if (flight && isUpcomingFlight(flight.date)) {
+                    showEditModal(flight);
+                }
+            });
+        });
+        
+        // Attach search event
+        const searchInput = document.getElementById('searchInput');
+        if (searchInput) {
+            searchInput.addEventListener('input', (e) => {
+                searchTerm = e.target.value;
+                renderFlightList();
+            });
+        }
+        
+        // Attach filter events
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                currentFilter = btn.getAttribute('data-filter');
+                renderFlightList();
+            });
+        });
+    }
+    
+    // Load flights
+    function loadFlights() {
+        allFlights = getAllFlights();
+        renderFlightList();
+    }
+    
+    // Listen for storage changes
+    window.addEventListener('storage', function(e) {
+        if (e.key === 'airline_flights') {
+            loadFlights();
+        }
+    });
+    
+    // Initialize
+    loadFlights();
+});
